@@ -104,12 +104,6 @@ export default function Portfolio() {
   return (
     <section id="portfolio" className="py-32 bg-white relative">
       <div className="container mx-auto px-6 md:px-12 max-w-7xl">
-        <div className="mb-20 pl-4 md:pl-0">
-          <h2 className="text-2xl font-mono text-black tracking-wide">
-            Main
-          </h2>
-        </div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <motion.div
