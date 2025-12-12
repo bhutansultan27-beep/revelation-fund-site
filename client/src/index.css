@@ -28,43 +28,43 @@
   --font-rajdhani: 'Rajdhani', sans-serif;
   --font-sans: 'Inter', sans-serif;
   
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
+  --radius-sm: 0px;
+  --radius-md: 2px;
+  --radius-lg: 4px;
 }
 
 :root {
-  /* Dark space theme by default */
-  --background: 240 10% 4%; /* #09090b - Very dark */
-  --foreground: 0 0% 98%;
+  /* Genblock-style: Deep black, sharp contrast */
+  --background: 0 0% 0%; 
+  --foreground: 0 0% 100%;
 
-  --card: 240 10% 6%;
-  --card-foreground: 0 0% 98%;
+  --card: 0 0% 5%;
+  --card-foreground: 0 0% 100%;
 
-  --popover: 240 10% 4%;
-  --popover-foreground: 0 0% 98%;
+  --popover: 0 0% 5%;
+  --popover-foreground: 0 0% 100%;
 
-  /* Revelation Fund Green Accent */
-  --primary: 142 70% 45%; /* A vibrant green similar to the logo */
-  --primary-foreground: 240 5% 10%;
+  /* Revelation Green - Sharp & Tech */
+  --primary: 142 70% 45%; 
+  --primary-foreground: 0 0% 0%;
 
-  --secondary: 240 4% 16%;
-  --secondary-foreground: 0 0% 98%;
+  --secondary: 0 0% 15%;
+  --secondary-foreground: 0 0% 100%;
 
-  --muted: 240 4% 16%;
-  --muted-foreground: 240 5% 65%;
+  --muted: 0 0% 15%;
+  --muted-foreground: 0 0% 60%;
 
   --accent: 142 70% 45%;
-  --accent-foreground: 240 5% 10%;
+  --accent-foreground: 0 0% 0%;
 
   --destructive: 0 62.8% 30.6%;
   --destructive-foreground: 0 0% 98%;
 
-  --border: 240 4% 16%;
-  --input: 240 4% 16%;
+  --border: 0 0% 20%;
+  --input: 0 0% 20%;
   --ring: 142 70% 45%;
 
-  --radius: 0.5rem;
+  --radius: 0px; /* Sharp edges for Genblock look */
 }
 
 @layer base {
@@ -76,25 +76,25 @@
   }
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar - Minimal */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: hsl(var(--background));
+  background: #000;
 }
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--secondary));
-  border-radius: 5px;
+  background: #333;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--primary));
+  background: var(--primary);
 }
 
+/* Sharp Glass Panel */
 .glass-panel {
-  background: rgba(10, 10, 12, 0.7);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .text-gradient {

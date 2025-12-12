@@ -16,8 +16,8 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "About", href: "#about" },
-    { name: "Portfolio", href: "#portfolio" },
+    { name: "about", href: "#about" },
+    { name: "portfolio", href: "#portfolio" },
   ];
 
   const scrollToSection = (id: string) => {
@@ -31,24 +31,17 @@ export default function Navbar() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-black/80 backdrop-blur-md py-4 border-b border-white/5" : "bg-transparent py-6"
+        scrolled ? "bg-black/90 backdrop-blur-sm py-4 border-b border-white/10" : "bg-transparent py-8"
       }`}
     >
-      <div className="container mx-auto px-6 flex items-center justify-between">
-        <div 
-          className="text-2xl font-orbitron font-bold text-white cursor-pointer tracking-wider"
-          onClick={() => scrollToSection("#hero")}
-        >
-          REVELATION<span className="text-primary">.FUND</span>
-        </div>
-
-        {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-8">
+      <div className="container mx-auto px-6 flex items-center justify-end">
+        {/* Desktop Menu - Minimal Text Links */}
+        <div className="hidden md:flex items-center space-x-12">
           {navLinks.map((link) => (
             <button
               key={link.name}
               onClick={() => scrollToSection(link.href)}
-              className="text-sm font-rajdhani font-medium text-gray-300 hover:text-primary transition-colors uppercase tracking-widest"
+              className="text-sm font-sans font-medium text-gray-400 hover:text-white transition-colors uppercase tracking-widest"
             >
               {link.name}
             </button>
@@ -71,14 +64,14 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-black/95 backdrop-blur-xl border-b border-white/10 overflow-hidden"
+            className="md:hidden bg-black border-b border-white/10 overflow-hidden"
           >
             <div className="flex flex-col items-center py-8 space-y-6">
               {navLinks.map((link) => (
                 <button
                   key={link.name}
                   onClick={() => scrollToSection(link.href)}
-                  className="text-lg font-rajdhani font-semibold text-white hover:text-primary uppercase tracking-wider"
+                  className="text-lg font-sans font-medium text-white hover:text-primary uppercase tracking-widest"
                 >
                   {link.name}
                 </button>

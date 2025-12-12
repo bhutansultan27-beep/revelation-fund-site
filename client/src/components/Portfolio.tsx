@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
-import { ExternalLink, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { 
   SiBinance 
 } from "react-icons/si";
 
-// Placeholder component for missing icons
+// Placeholder component for missing icons - Minimalist Style
 const GenericIcon = ({ name }: { name: string }) => (
-  <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center text-primary font-bold text-xl border border-white/10">
+  <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white font-sans text-sm">
     {name.charAt(0)}
   </div>
 );
@@ -64,7 +64,7 @@ const projects = [
     name: "Binance",
     url: "https://binance.com",
     description: "The world's leading cryptocurrency exchange.",
-    icon: <SiBinance className="text-4xl text-[#F0B90B]" />
+    icon: <SiBinance className="text-3xl text-[#F0B90B]" />
   },
   {
     name: "Crush",
@@ -100,58 +100,49 @@ const projects = [
 
 export default function Portfolio() {
   return (
-    <section id="portfolio" className="py-24 bg-black relative">
-      <div className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-20"
-        >
-          <h2 className="text-sm font-rajdhani font-bold text-primary tracking-[0.2em] uppercase mb-4">Our Investments</h2>
-          <h3 className="text-3xl md:text-5xl font-orbitron font-bold text-white">
-            Portfolio
-          </h3>
-        </motion.div>
+    <section id="portfolio" className="py-32 bg-black relative border-t border-white/5">
+      <div className="container mx-auto px-6 md:px-12">
+        <div className="grid md:grid-cols-12 gap-12">
+          {/* Label Column */}
+          <div className="md:col-span-3">
+             <h2 className="text-sm font-sans font-bold text-primary tracking-[0.2em] uppercase sticky top-32">
+              Portfolio
+            </h2>
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
-            <motion.a
-              key={index}
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
-              className="group glass-panel p-8 rounded-xl hover:border-primary/50 transition-all duration-300 flex flex-col items-start relative overflow-hidden"
-            >
-              <div className="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <ArrowUpRight className="text-primary" size={20} />
-              </div>
-              
-              <div className="mb-6 opacity-80 group-hover:opacity-100 transition-opacity">
-                {project.icon}
-              </div>
-              
-              <h4 className="text-xl font-orbitron font-bold text-white mb-3 group-hover:text-primary transition-colors">
-                {project.name}
-              </h4>
-              
-              <p className="text-gray-400 font-sans text-sm leading-relaxed mb-4 flex-grow">
-                {project.description}
-              </p>
-              
-              <div className="text-xs font-rajdhani font-bold text-primary/70 uppercase tracking-widest mt-auto">
-                Visit Website
-              </div>
-              
-              {/* Hover Glow */}
-              <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-primary/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-            </motion.a>
-          ))}
+          {/* Grid Column */}
+          <div className="md:col-span-9">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
+              {projects.map((project, index) => (
+                <motion.a
+                  key={index}
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                  className="group block border-b border-white/10 pb-8 hover:border-primary/50 transition-colors"
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="text-white/80 group-hover:text-white transition-colors">
+                      {project.icon}
+                    </div>
+                    <ArrowUpRight className="text-white/20 group-hover:text-primary transition-colors transform group-hover:translate-x-1 group-hover:-translate-y-1" size={20} />
+                  </div>
+                  
+                  <h4 className="text-lg font-sans font-medium text-white mb-2 tracking-wide">
+                    {project.name}
+                  </h4>
+                  
+                  <p className="text-gray-500 font-sans text-sm font-light leading-relaxed">
+                    {project.description}
+                  </p>
+                </motion.a>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
