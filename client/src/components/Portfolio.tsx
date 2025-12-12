@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { 
   SiBinance 
 } from "react-icons/si";
 
-// Placeholder component for missing icons - Minimalist Style
+// Minimal Square Icon Placeholder
 const GenericIcon = ({ name }: { name: string }) => (
-  <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white font-sans text-sm">
+  <div className="w-16 h-16 bg-black flex items-center justify-center text-white font-sans text-2xl font-light">
     {name.charAt(0)}
   </div>
 );
@@ -64,7 +64,7 @@ const projects = [
     name: "Binance",
     url: "https://binance.com",
     description: "The world's leading cryptocurrency exchange.",
-    icon: <SiBinance className="text-3xl text-[#F0B90B]" />
+    icon: <SiBinance className="text-6xl text-black" />
   },
   {
     name: "Crush",
@@ -100,49 +100,42 @@ const projects = [
 
 export default function Portfolio() {
   return (
-    <section id="portfolio" className="py-32 bg-black relative border-t border-white/5">
-      <div className="container mx-auto px-6 md:px-12">
-        <div className="grid md:grid-cols-12 gap-12">
-          {/* Label Column */}
-          <div className="md:col-span-3">
-             <h2 className="text-sm font-sans font-bold text-primary tracking-[0.2em] uppercase sticky top-32">
-              Portfolio
-            </h2>
-          </div>
+    <section id="portfolio" className="py-32 bg-white relative">
+      <div className="container mx-auto px-6 md:px-12 max-w-7xl">
+        <div className="mb-20 pl-4 md:pl-0">
+          <h2 className="text-2xl font-mono text-black tracking-wide">
+            Main
+          </h2>
+        </div>
 
-          {/* Grid Column */}
-          <div className="md:col-span-9">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
-              {projects.map((project, index) => (
-                <motion.a
-                  key={index}
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.05 }}
-                  className="group block border-b border-white/10 pb-8 hover:border-primary/50 transition-colors"
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="text-white/80 group-hover:text-white transition-colors">
-                      {project.icon}
-                    </div>
-                    <ArrowUpRight className="text-white/20 group-hover:text-primary transition-colors transform group-hover:translate-x-1 group-hover:-translate-y-1" size={20} />
-                  </div>
-                  
-                  <h4 className="text-lg font-sans font-medium text-white mb-2 tracking-wide">
-                    {project.name}
-                  </h4>
-                  
-                  <p className="text-gray-500 font-sans text-sm font-light leading-relaxed">
-                    {project.description}
-                  </p>
-                </motion.a>
-              ))}
-            </div>
-          </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.05 }}
+              className="bg-gray-50 p-8 md:p-12 flex flex-col items-center text-center group hover:shadow-lg transition-shadow duration-300"
+            >
+              <div className="h-32 flex items-center justify-center mb-8 grayscale group-hover:grayscale-0 transition-all">
+                {project.icon}
+              </div>
+              
+              <p className="font-mono text-xs text-gray-500 leading-relaxed mb-12 flex-grow max-w-xs mx-auto">
+                {project.description}
+              </p>
+              
+              <a 
+                href={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-xs font-bold text-black uppercase tracking-widest flex items-center gap-2 hover:gap-3 transition-all"
+              >
+                website <ArrowRight size={12} />
+              </a>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

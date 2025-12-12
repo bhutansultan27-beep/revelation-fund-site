@@ -2,58 +2,61 @@ import { motion } from "framer-motion";
 import { FaMedium } from "react-icons/fa";
 import { SiX } from "react-icons/si"; 
 import logo from "@assets/d7875c16-a616-404e-a523-fbbd4ebe6785_1765556399619.jpeg";
-import SpaceBackground from "./SpaceBackground";
+import GeometricBackground from "./GeometricBackground"; // Changed to Geometric background
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative h-screen w-full overflow-hidden flex items-center justify-center">
-      {/* Canvas Background */}
-      <div className="absolute inset-0 z-0">
-        <SpaceBackground />
-        <div className="absolute inset-0 bg-black/50 z-10" /> {/* Darker Overlay for Contrast */}
+    <section id="hero" className="relative h-screen w-full flex items-center justify-center bg-white overflow-hidden">
+      {/* Geometric Wireframe Background */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center opacity-10 pointer-events-none">
+        <GeometricBackground />
       </div>
 
       {/* Content */}
       <div className="relative z-20 container mx-auto px-4 flex flex-col items-center text-center">
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
           className="flex flex-col items-center"
         >
-          {/* Logo Section */}
-          <div className="mb-10">
-            <div className="w-56 h-56 rounded-full overflow-hidden bg-black border-4 border-white/5 shadow-2xl">
-               <img src={logo} alt="Revelation Fund" className="w-full h-full object-cover" />
+          {/* Logo & Text Lockup */}
+          <div className="flex items-center gap-6 mb-6">
+            <div className="w-16 h-16 md:w-20 md:h-20">
+               <img src={logo} alt="Revelation Fund" className="w-full h-full object-contain" />
             </div>
+            <h1 className="text-3xl md:text-5xl font-sans font-normal text-gray-900 tracking-widest uppercase">
+              Revelation Fund
+            </h1>
           </div>
           
-          {/* Title - Clean & Sharp */}
-          <h1 className="text-4xl md:text-5xl font-sans font-light text-white tracking-[0.2em] mb-4 uppercase">
-            Revelation Fund
-          </h1>
-
-          {/* Social Links - Directly underneath */}
-          <div className="flex items-center justify-center gap-8 mt-8">
-            <a 
-              href="https://medium.com/mantra-dao/mantra-dao-entices-institutional-and-retail-investors-from-all-corners-of-the-world-fbace8222e01" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors duration-300 transform hover:scale-110"
-            >
-              <FaMedium className="text-2xl" />
-            </a>
-            
+          {/* Social Links - Minimal Icons below */}
+          <div className="flex items-center justify-center gap-6 mt-2">
             <a 
               href="https://x.com/revelationfrank?s=21" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-gray-400 hover:text-white transition-colors duration-300 transform hover:scale-110"
+              className="text-black hover:text-gray-600 transition-colors duration-300"
             >
-              <SiX className="text-2xl" />
+              <SiX className="text-xl" />
+            </a>
+            <a 
+              href="https://medium.com/mantra-dao/mantra-dao-entices-institutional-and-retail-investors-from-all-corners-of-the-world-fbace8222e01" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-black hover:text-gray-600 transition-colors duration-300"
+            >
+              <FaMedium className="text-2xl" />
             </a>
           </div>
         </motion.div>
+      </div>
+
+      {/* Footer Copy */}
+      <div className="absolute bottom-12 left-0 right-0 text-center">
+        <p className="font-mono text-xs text-gray-500">
+          © {new Date().getFullYear()} Revelation Fund
+        </p>
       </div>
     </section>
   );
