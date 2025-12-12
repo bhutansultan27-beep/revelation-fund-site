@@ -20,9 +20,9 @@ export default function Hero() {
           transition={{ duration: 1.2, ease: "easeOut" }}
           className="flex flex-col items-center"
         >
-          {/* Logo Only - Centered with transparent background */}
+          {/* Logo Only - Centered */}
           <div className="mb-8"> 
-             <img src={logo} alt="Revelation Fund" className="w-48 h-auto object-contain mix-blend-multiply" />
+             <img src={logo} alt="Revelation Fund" className="w-64 h-auto object-contain rounded-lg" />
           </div>
           
           {/* Social Links - Minimal Icons below */}
