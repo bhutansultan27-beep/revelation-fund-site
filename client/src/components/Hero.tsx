@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { FaMedium } from "react-icons/fa";
 import { SiX } from "react-icons/si"; 
 import logo from "@assets/d7875c16-a616-404e-a523-fbbd4ebe6785_1765556399619.jpeg";
-import GeometricBackground from "./GeometricBackground"; // Changed to Geometric background
+import GeometricBackground from "./GeometricBackground"; 
 
 export default function Hero() {
   return (
@@ -20,18 +20,13 @@ export default function Hero() {
           transition={{ duration: 1.2, ease: "easeOut" }}
           className="flex flex-col items-center"
         >
-          {/* Logo & Text Lockup */}
-          <div className="flex items-center gap-6 mb-6">
-            <div className="w-16 h-16 md:w-20 md:h-20">
-               <img src={logo} alt="Revelation Fund" className="w-full h-full object-contain" />
-            </div>
-            <h1 className="text-3xl md:text-5xl font-sans font-normal text-gray-900 tracking-widest uppercase">
-              Revelation Fund
-            </h1>
+          {/* Logo Only - Centered and Transparent mix-blend-mode for white bg */}
+          <div className="mb-8 mix-blend-multiply"> 
+             <img src={logo} alt="Revelation Fund" className="w-48 h-auto object-contain" />
           </div>
           
           {/* Social Links - Minimal Icons below */}
-          <div className="flex items-center justify-center gap-6 mt-2">
+          <div className="flex items-center justify-center gap-6 mt-4">
             <a 
               href="https://x.com/revelationfrank?s=21" 
               target="_blank" 
