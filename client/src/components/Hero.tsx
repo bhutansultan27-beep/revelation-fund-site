@@ -1,25 +1,17 @@
 import { motion } from "framer-motion";
-import { FaMedium, FaTwitter } from "react-icons/fa";
-import { SiX } from "react-icons/si"; // X icon
+import { FaMedium } from "react-icons/fa";
+import { SiX } from "react-icons/si"; 
 import logo from "@assets/d7875c16-a616-404e-a523-fbbd4ebe6785_1765556399619.jpeg";
-import bgVideo from "@assets/generated_videos/abstract_dark_space_background_with_green_nebula_and_floating_particles.mp4";
+import SpaceBackground from "./SpaceBackground";
 
 export default function Hero() {
   return (
     <section id="hero" className="relative h-screen w-full overflow-hidden flex items-center justify-center">
-      {/* Video Background */}
+      {/* Canvas Background */}
       <div className="absolute inset-0 z-0">
+        <SpaceBackground />
         <div className="absolute inset-0 bg-black/40 z-10" /> {/* Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-background z-10" />
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-full object-cover opacity-80"
-        >
-          <source src={bgVideo} type="video/mp4" />
-        </video>
       </div>
 
       {/* Content */}
