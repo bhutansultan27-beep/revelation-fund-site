@@ -1,32 +1,16 @@
 import { useState, useEffect } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const [location] = useLocation();
 
   const navLinks = [
-    { name: "about", href: "#about" },
-    { name: "portfolio", href: "#portfolio" },
+    { name: "about", href: "/about" },
+    { name: "portfolio", href: "/portfolio" },
   ];
-
-  const scrollToSection = (id: string) => {
-    const element = document.querySelector(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsOpen(false);
-    }
-  };
 
   return (
     <nav className="fixed top-0 right-0 z-50 p-8 md:p-12">
@@ -34,13 +18,15 @@ export default function Navbar() {
         {/* Desktop Menu - Typewriter style text */}
         <div className="hidden md:flex items-center space-x-6">
           {navLinks.map((link) => (
-            <button
-              key={link.name}
-              onClick={() => scrollToSection(link.href)}
-              className="text-base font-mono text-gray-800 hover:text-black transition-colors"
-            >
-              {link.name}
-            </button>
+            <Link key={link.name} href={link.href}>
+              <a 
+                className={`text-base font-mono transition-colors ${
+                  location === link.href ? "text-black font-bold" : "text-gray-800 hover:text-black"
+                }`}
+              >
+                {link.name}
+              </a>
+            </Link>
           ))}
         </div>
 
@@ -64,13 +50,16 @@ export default function Navbar() {
           >
             <div className="flex flex-col space-y-4">
               {navLinks.map((link) => (
-                <button
-                  key={link.name}
-                  onClick={() => scrollToSection(link.href)}
-                  className="text-right text-base font-mono text-gray-800 hover:text-black"
-                >
-                  {link.name}
-                </button>
+                <Link key={link.name} href={link.href}>
+                   <a 
+                    className={`text-right text-base font-mono hover:text-black ${
+                      location === link.href ? "text-black font-bold" : "text-gray-800"
+                    }`}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {link.name}
+                  </a>
+                </Link>
               ))}
             </div>
           </motion.div>
