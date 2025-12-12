@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { FaMedium } from "react-icons/fa";
 import { SiX } from "react-icons/si"; 
-import logo from "@assets/d7875c16-a616-404e-a523-fbbd4ebe6785_1765556399619.jpeg";
+import logo from "@assets/d7875c16-a616-404e-a523-fbbd4ebe6785-removebg-preview_1765559681672.png";
 import GeometricBackground from "./GeometricBackground"; 
 
 export default function Hero() {
