@@ -13,113 +13,91 @@ export default function SpaceBackground() {
     let width = canvas.width = window.innerWidth;
     let height = canvas.height = window.innerHeight;
 
-    let time = 0;
+    // Particles/Stars
+    const stars: { x: number; y: number; size: number; speed: number; opacity: number }[] = [];
+    const starCount = 200;
 
-    interface Wave {
-      amplitude: number;
-      frequency: number;
-      speed: number;
-      yOffset: number;
-      color: string;
-      thickness: number;
-    }
-
-    const waves: Wave[] = [
-      { amplitude: 80, frequency: 0.008, speed: 0.015, yOffset: 0.3, color: 'rgba(74, 222, 128, 0.15)', thickness: 120 },
-      { amplitude: 60, frequency: 0.012, speed: 0.02, yOffset: 0.4, color: 'rgba(34, 197, 94, 0.1)', thickness: 100 },
-      { amplitude: 100, frequency: 0.006, speed: 0.01, yOffset: 0.5, color: 'rgba(20, 83, 45, 0.2)', thickness: 150 },
-      { amplitude: 50, frequency: 0.015, speed: 0.025, yOffset: 0.6, color: 'rgba(74, 222, 128, 0.08)', thickness: 80 },
-      { amplitude: 70, frequency: 0.01, speed: 0.018, yOffset: 0.7, color: 'rgba(22, 163, 74, 0.12)', thickness: 110 },
-    ];
-
-    interface Particle {
-      x: number;
-      y: number;
-      size: number;
-      speedX: number;
-      speedY: number;
-      opacity: number;
-      pulse: number;
-    }
-
-    const particles: Particle[] = [];
-    const particleCount = 50;
-
-    for (let i = 0; i < particleCount; i++) {
-      particles.push({
+    // Nebula clouds (simulated with large glowing particles)
+    const nebulas: { x: number; y: number; radius: number; color: string; vx: number; vy: number }[] = [];
+    
+    // Initialize Stars
+    for (let i = 0; i < starCount; i++) {
+      stars.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        size: Math.random() * 3 + 1,
-        speedX: (Math.random() - 0.5) * 0.5,
-        speedY: (Math.random() - 0.5) * 0.3,
-        opacity: Math.random() * 0.5 + 0.2,
-        pulse: Math.random() * Math.PI * 2
+        size: Math.random() * 2,
+        speed: Math.random() * 0.5 + 0.1,
+        opacity: Math.random()
       });
     }
+
+    // Initialize Nebula Clouds - matching the green theme
+    const colors = [
+      'rgba(20, 80, 40, 0.15)', // Dark Green
+      'rgba(74, 222, 128, 0.05)', // Bright Green (very transparent)
+      'rgba(10, 30, 20, 0.2)',  // Very Dark Green
+    ];
+
+    for (let i = 0; i < 6; i++) {
+      nebulas.push({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 300 + 200,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        vx: (Math.random() - 0.5) * 0.2,
+        vy: (Math.random() - 0.5) * 0.2
+      });
+    }
+
+    let animationFrameId: number;
 
     const render = () => {
       ctx.clearRect(0, 0, width, height);
+      
+      // Draw background
+      // ctx.fillStyle = '#050505'; // Very dark bg
+      // ctx.fillRect(0, 0, width, height);
 
-      waves.forEach(wave => {
+      // Draw Nebulas
+      nebulas.forEach(nebula => {
+        nebula.x += nebula.vx;
+        nebula.y += nebula.vy;
+
+        // Bounce off edges (softly)
+        if (nebula.x < -nebula.radius) nebula.x = width + nebula.radius;
+        if (nebula.x > width + nebula.radius) nebula.x = -nebula.radius;
+        if (nebula.y < -nebula.radius) nebula.y = height + nebula.radius;
+        if (nebula.y > height + nebula.radius) nebula.y = -nebula.radius;
+
+        const gradient = ctx.createRadialGradient(nebula.x, nebula.y, 0, nebula.x, nebula.y, nebula.radius);
+        gradient.addColorStop(0, nebula.color);
+        gradient.addColorStop(1, 'rgba(0,0,0,0)');
+
+        ctx.fillStyle = gradient;
         ctx.beginPath();
-        ctx.moveTo(0, height);
+        ctx.arc(nebula.x, nebula.y, nebula.radius, 0, Math.PI * 2);
+        ctx.fill();
+      });
 
-        for (let x = 0; x <= width; x += 5) {
-          const y = height * wave.yOffset + 
-                    Math.sin(x * wave.frequency + time * wave.speed) * wave.amplitude +
-                    Math.sin(x * wave.frequency * 0.5 + time * wave.speed * 1.5) * (wave.amplitude * 0.5);
-          
-          if (x === 0) {
-            ctx.moveTo(x, y);
-          } else {
-            ctx.lineTo(x, y);
-          }
+      // Draw Stars
+      ctx.fillStyle = '#FFFFFF';
+      stars.forEach(star => {
+        star.y -= star.speed; // Move up
+        
+        // Reset if out of bounds
+        if (star.y < 0) {
+          star.y = height;
+          star.x = Math.random() * width;
         }
 
-        ctx.lineTo(width, height);
-        ctx.lineTo(0, height);
-        ctx.closePath();
-
-        const gradient = ctx.createLinearGradient(0, height * wave.yOffset - wave.amplitude, 0, height);
-        gradient.addColorStop(0, wave.color);
-        gradient.addColorStop(1, 'rgba(0, 0, 0, 0)');
-        
-        ctx.fillStyle = gradient;
+        ctx.globalAlpha = star.opacity;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
         ctx.fill();
       });
+      ctx.globalAlpha = 1;
 
-      particles.forEach(particle => {
-        particle.x += particle.speedX;
-        particle.y += particle.speedY;
-        particle.pulse += 0.02;
-
-        if (particle.x < 0) particle.x = width;
-        if (particle.x > width) particle.x = 0;
-        if (particle.y < 0) particle.y = height;
-        if (particle.y > height) particle.y = 0;
-
-        const pulseOpacity = particle.opacity * (0.5 + Math.sin(particle.pulse) * 0.5);
-        
-        const glow = ctx.createRadialGradient(
-          particle.x, particle.y, 0,
-          particle.x, particle.y, particle.size * 3
-        );
-        glow.addColorStop(0, `rgba(74, 222, 128, ${pulseOpacity})`);
-        glow.addColorStop(1, 'rgba(74, 222, 128, 0)');
-        
-        ctx.fillStyle = glow;
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size * 3, 0, Math.PI * 2);
-        ctx.fill();
-
-        ctx.fillStyle = `rgba(255, 255, 255, ${pulseOpacity})`;
-        ctx.beginPath();
-        ctx.arc(particle.x, particle.y, particle.size * 0.5, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      time += 1;
-      requestAnimationFrame(render);
+      animationFrameId = requestAnimationFrame(render);
     };
 
     render();
@@ -133,6 +111,7 @@ export default function SpaceBackground() {
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
