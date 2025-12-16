@@ -2,14 +2,14 @@ import { motion } from "framer-motion";
 import { FaMedium } from "react-icons/fa";
 import { SiX } from "react-icons/si"; 
 import logo from "@assets/d7875c16-a616-404e-a523-fbbd4ebe6785-removebg-preview_1765559681672.png";
-import GeometricBackground from "./GeometricBackground"; 
+import VantaGlobe from "./VantaGlobe"; 
 
 export default function Hero() {
   return (
     <section id="hero" className="relative h-screen w-full flex items-center justify-center bg-white overflow-hidden">
-      {/* Geometric Wireframe Background */}
-      <div className="absolute inset-0 z-0 flex items-center justify-center opacity-10 pointer-events-none">
-        <GeometricBackground />
+      {/* Vanta Globe Background - positioned to the right */}
+      <div className="absolute inset-0 z-0">
+        <VantaGlobe />
       </div>
 
       {/* Content */}
