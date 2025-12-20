@@ -1,4 +1,5 @@
 import { Link, useLocation } from "wouter";
+import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
   const [location] = useLocation();
@@ -16,12 +17,13 @@ export default function Navbar() {
             key={link.name} 
             href={link.href}
             className={`text-base font-mono transition-colors cursor-pointer ${
-              location === link.href ? "text-black font-bold" : "text-gray-800 hover:text-black"
+              location === link.href ? "text-black dark:text-white font-bold" : "text-gray-800 dark:text-gray-300 hover:text-black dark:hover:text-white"
             }`}
           >
             {link.name}
           </Link>
         ))}
+        <ThemeToggle />
       </div>
     </nav>
   );
