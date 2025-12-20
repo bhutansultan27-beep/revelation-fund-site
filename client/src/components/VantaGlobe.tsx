@@ -36,15 +36,15 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
             gyroControls: false,
             minHeight: 200.00,
             minWidth: 200.00,
-            scale: 0.1,
-            scaleMobile: 0.1,
-            color: 0xffffff,
-            color2: 0xffffff,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x1a8f4e,
+            color2: 0x0d4d29,
             backgroundColor: 0xffffff,
             size: 0,
             points: 0,
-            maxDistance: 0,
-            baseFrequency: 0,
+            maxDistance: 20.00,
+            dotSize: 0,
           });
           setVantaEffect(effect);
         }
