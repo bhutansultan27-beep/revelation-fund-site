@@ -38,12 +38,12 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
             minWidth: 200.00,
             scale: 1.00,
             scaleMobile: 1.00,
-            color: 0xffffff,
-            color2: 0xffffff,
+            color: 0x1a8f4e,
+            color2: 0x0d4d29,
             backgroundColor: 0xffffff,
-            size: 0,
-            points: 0,
-            maxDistance: 0,
+            size: 1,
+            points: 1,
+            maxDistance: 20.00,
             dotSize: 0,
           });
           setVantaEffect(effect);
@@ -66,7 +66,6 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
     <div 
       ref={vantaRef} 
       className={`absolute inset-0 ${className}`}
-      style={{ display: 'none' }}
     />
   );
 }
