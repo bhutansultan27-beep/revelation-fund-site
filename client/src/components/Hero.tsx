@@ -7,10 +7,19 @@ import { useState, useEffect } from "react";
 
 export default function Hero() {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [rotation, setRotation] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setMousePos({ x: e.clientX, y: e.clientY });
+      
+      // Calculate rotation based on mouse position
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      const rotateY = (e.clientX - centerX) / centerX * 15; // Max 15 degrees
+      const rotateX = (centerY - e.clientY) / centerY * 15; // Max 15 degrees
+      
+      setRotation({ x: rotateX, y: rotateY });
     };
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -34,15 +43,29 @@ export default function Hero() {
           <motion.div 
             className="mb-8"
             animate={{ 
-              x: (mousePos.x - window.innerWidth / 2) * 0.05,
+              rotateX: rotation.x,
+              rotateY: rotation.y,
             }}
             transition={{ 
-              x: { duration: 0.5, ease: "easeOut" }
+              rotateX: { duration: 0.3, ease: "easeOut" },
+              rotateY: { duration: 0.3, ease: "easeOut" }
             }}
+            style={{ perspective: 1000 }}
           >
             <img src={logo} alt="Revelation Fund" className="w-64 h-auto object-contain rounded-lg" />
           </motion.div>
-          <motion.div className="flex gap-6 mt-4" animate={{ x: (mousePos.x - window.innerWidth / 2) * 0.05 }} transition={{ x: { duration: 0.5, ease: "easeOut" } }}>
+          <motion.div 
+            className="flex gap-6 mt-4"
+            animate={{ 
+              rotateX: rotation.x,
+              rotateY: rotation.y,
+            }}
+            transition={{ 
+              rotateX: { duration: 0.3, ease: "easeOut" },
+              rotateY: { duration: 0.3, ease: "easeOut" }
+            }}
+            style={{ perspective: 1000 }}
+          >
             <a href="https://x.com/revelationfrank?s=21" target="_blank" rel="noopener noreferrer" className="text-black hover:text-gray-600 inline-flex items-center justify-center"><SiX className="text-xl" /></a><a href="https://medium.com/mantra-dao/mantra-dao-entices-institutional-and-retail-investors-from-all-corners-of-the-world-fbace8222e01" target="_blank" rel="noopener noreferrer" className="text-black hover:text-gray-600 inline-flex items-center justify-center"><FaMedium className="text-2xl" /></a>
           </motion.div>
         </motion.div>
