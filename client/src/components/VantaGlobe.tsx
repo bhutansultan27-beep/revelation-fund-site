@@ -45,6 +45,7 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
             points: 0,
             maxDistance: 20.00,
             dotSize: 0,
+            spacing: 0,
           });
           setVantaEffect(effect);
         }
