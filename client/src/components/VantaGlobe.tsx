@@ -5,11 +5,10 @@ interface VantaGlobeProps {
   className?: string;
 }
 
-type EffectType = 'rings' | 'topology' | 'waves' | 'halo' | 'dots';
+type EffectType = 'rings' | 'topology' | 'waves' | 'halo';
 
 export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
   const vantaRef = useRef<HTMLDivElement>(null);
-  const [vantaEffect, setVantaEffect] = useState<any>(null);
   const [effectType, setEffectType] = useState<EffectType>('rings');
   const effectRefValue = useRef<any>(null);
 
@@ -22,13 +21,14 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
         } catch (e) {
           console.error('Error destroying effect:', e);
         }
+        effectRefValue.current = null;
       }
 
       if (!vantaRef.current) return;
 
       try {
         let VANTA: any;
-        const config: any = {
+        const baseConfig: any = {
           el: vantaRef.current,
           THREE: THREE,
           mouseControls: true,
@@ -51,25 +51,18 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
             break;
           case 'waves':
             VANTA = await import('vanta/dist/vanta.waves.min') as any;
-            config.waveHeight = 20;
-            config.waveSpeed = 0.5;
+            baseConfig.waveHeight = 20;
+            baseConfig.waveSpeed = 0.5;
             break;
           case 'halo':
             VANTA = await import('vanta/dist/vanta.halo.min') as any;
-            break;
-          case 'dots':
-            VANTA = await import('vanta/dist/vanta.dots.min') as any;
-            config.color2 = 0x0066ff;
-            config.particleSize = 4;
-            config.particleCount = 4;
             break;
           default:
             VANTA = await import('vanta/dist/vanta.rings.min') as any;
         }
 
-        const effect = VANTA.default(config);
+        const effect = VANTA.default(baseConfig);
         effectRefValue.current = effect;
-        setVantaEffect(effect);
       } catch (error) {
         console.error(`Failed to load ${effectType} effect:`, error);
       }
@@ -84,57 +77,20 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
         ref={vantaRef} 
         className={`absolute inset-0 pointer-events-none ${className}`}
       />
-      <div className="absolute bottom-4 left-4 flex gap-2 z-50 flex-wrap max-w-xs pointer-events-auto">
-        <button
-          onClick={() => setEffectType('rings')}
-          className={`px-3 py-1 text-sm rounded transition ${
-            effectType === 'rings'
-              ? 'bg-cyan-500 text-white'
-              : 'bg-white text-cyan-500 border border-cyan-500 hover:bg-cyan-50'
-          }`}
-        >
-          Rings
-        </button>
-        <button
-          onClick={() => setEffectType('topology')}
-          className={`px-3 py-1 text-sm rounded transition ${
-            effectType === 'topology'
-              ? 'bg-cyan-500 text-white'
-              : 'bg-white text-cyan-500 border border-cyan-500 hover:bg-cyan-50'
-          }`}
-        >
-          Topology
-        </button>
-        <button
-          onClick={() => setEffectType('waves')}
-          className={`px-3 py-1 text-sm rounded transition ${
-            effectType === 'waves'
-              ? 'bg-cyan-500 text-white'
-              : 'bg-white text-cyan-500 border border-cyan-500 hover:bg-cyan-50'
-          }`}
-        >
-          Waves
-        </button>
-        <button
-          onClick={() => setEffectType('halo')}
-          className={`px-3 py-1 text-sm rounded transition ${
-            effectType === 'halo'
-              ? 'bg-cyan-500 text-white'
-              : 'bg-white text-cyan-500 border border-cyan-500 hover:bg-cyan-50'
-          }`}
-        >
-          Halo
-        </button>
-        <button
-          onClick={() => setEffectType('dots')}
-          className={`px-3 py-1 text-sm rounded transition ${
-            effectType === 'dots'
-              ? 'bg-cyan-500 text-white'
-              : 'bg-white text-cyan-500 border border-cyan-500 hover:bg-cyan-50'
-          }`}
-        >
-          Dots
-        </button>
+      <div className="fixed bottom-4 left-4 flex gap-2 z-50 flex-wrap pointer-events-auto">
+        {(['rings', 'topology', 'waves', 'halo'] as const).map((effect) => (
+          <button
+            key={effect}
+            onClick={() => setEffectType(effect)}
+            className={`px-3 py-1 text-sm rounded transition whitespace-nowrap cursor-pointer ${
+              effectType === effect
+                ? 'bg-cyan-500 text-white shadow-lg'
+                : 'bg-white text-cyan-500 border border-cyan-500 hover:bg-cyan-50'
+            }`}
+          >
+            {effect.charAt(0).toUpperCase() + effect.slice(1)}
+          </button>
+        ))}
       </div>
     </>
   );
