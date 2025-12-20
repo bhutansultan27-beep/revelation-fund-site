@@ -27,7 +27,7 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
             minWidth: 200.00,
             scale: 1.00,
             scaleMobile: 1.00,
-            color: 0x1a8f4e,
+            color: 0x00d4ff,
             backgroundColor: 0xffffff,
           });
           
