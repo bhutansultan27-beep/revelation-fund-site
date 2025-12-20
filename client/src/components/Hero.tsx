@@ -16,8 +16,8 @@ export default function Hero() {
       // Calculate rotation based on mouse position
       const centerX = window.innerWidth / 2;
       const centerY = window.innerHeight / 2;
-      const rotateY = (e.clientX - centerX) / centerX * 30; // Max 30 degrees
-      const rotateX = (centerY - e.clientY) / centerY * 30; // Max 30 degrees
+      const rotateY = (e.clientX - centerX) / centerX * 60; // Max 60 degrees (left/right)
+      const rotateX = (centerY - e.clientY) / centerY * 60; // Max 60 degrees (up/down)
       
       setRotation({ x: rotateX, y: rotateY });
     };
