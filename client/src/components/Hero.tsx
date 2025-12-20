@@ -48,7 +48,15 @@ export default function Hero() {
           </motion.div>
           
           {/* Social Links - Minimal Icons below */}
-          <div className="flex items-center justify-center gap-6 mt-4">
+          <motion.div 
+            className="flex items-center justify-center gap-6 mt-4 list-none"
+            animate={{ 
+              x: (mousePos.x - window.innerWidth / 2) * 0.05,
+            }}
+            transition={{ 
+              x: { duration: 0.5, ease: "easeOut" }
+            }}
+          >
             <a 
               href="https://x.com/revelationfrank?s=21" 
               target="_blank" 
@@ -65,7 +73,7 @@ export default function Hero() {
             >
               <FaMedium className="text-2xl" />
             </a>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
 
