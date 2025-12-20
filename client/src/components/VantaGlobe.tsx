@@ -82,9 +82,9 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
     <>
       <div 
         ref={vantaRef} 
-        className={`absolute inset-0 ${className}`}
+        className={`absolute inset-0 pointer-events-none ${className}`}
       />
-      <div className="absolute bottom-4 left-4 flex gap-2 z-50 flex-wrap max-w-xs">
+      <div className="absolute bottom-4 left-4 flex gap-2 z-50 flex-wrap max-w-xs pointer-events-auto">
         <button
           onClick={() => setEffectType('rings')}
           className={`px-3 py-1 text-sm rounded transition ${
