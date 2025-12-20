@@ -32,6 +32,9 @@ export default function Hero() {
         <VantaGlobe />
       </div>
 
+      {/* White cover box for center point */}
+      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 z-10 w-96 h-80 bg-white"></div>
+
       {/* Content */}
       <div className="relative z-20 container mx-auto px-4 h-screen flex flex-col items-center justify-center">
         <motion.div
