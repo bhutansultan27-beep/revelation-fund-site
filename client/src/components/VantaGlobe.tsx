@@ -46,6 +46,19 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
             maxDistance: 20.00,
             dotSize: 0,
           });
+          
+          // Remove the globe mesh from the scene after effect initializes
+          setTimeout(() => {
+            if (effect.scene) {
+              effect.scene.traverse((object: any) => {
+                // Remove globe geometry (typically a sphere mesh)
+                if (object.geometry && object.geometry.type === 'IcosahedronGeometry') {
+                  effect.scene.remove(object);
+                }
+              });
+            }
+          }, 100);
+          
           setVantaEffect(effect);
         }
       } catch (error) {
@@ -65,7 +78,7 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
   return (
     <div 
       ref={vantaRef} 
-      className={`absolute inset-0 hidden ${className}`}
+      className={`absolute inset-0 ${className}`}
     />
   );
 }
