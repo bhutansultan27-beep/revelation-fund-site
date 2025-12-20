@@ -23,7 +23,7 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
       if (!vantaRef.current) return;
 
       try {
-        const VANTA = await import('vanta/dist/vanta.rings.min') as any;
+        const VANTA = await import('vanta/dist/vanta.globe.min') as any;
         
         const effect = VANTA.default({
           el: vantaRef.current,
@@ -36,7 +36,12 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
           scale: 1.00,
           scaleMobile: 1.00,
           color: 0x00d4ff,
+          color2: 0x00a8cc,
           backgroundColor: 0xffffff,
+          size: 1,
+          points: 0,
+          maxDistance: 20.00,
+          dotSize: 0,
         });
 
         effectRefValue.current = effect;
