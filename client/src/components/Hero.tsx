@@ -16,8 +16,8 @@ export default function Hero() {
       // Calculate rotation based on mouse position
       const centerX = window.innerWidth / 2;
       const centerY = window.innerHeight / 2;
-      const rotateY = (e.clientX - centerX) / centerX * 60; // Max 60 degrees (left/right)
-      const rotateX = (centerY - e.clientY) / centerY * 60; // Max 60 degrees (up/down)
+      const rotateY = (e.clientX - centerX) / centerX * 240; // Max 240 degrees (left/right)
+      const rotateX = (centerY - e.clientY) / centerY * 240; // Max 240 degrees (up/down)
       
       setRotation({ x: rotateX, y: rotateY });
     };
@@ -50,9 +50,20 @@ export default function Hero() {
               rotateX: { duration: 0.3, ease: "easeOut" },
               rotateY: { duration: 0.3, ease: "easeOut" }
             }}
-            style={{ perspective: 1000 }}
+            style={{ 
+              perspective: 1200,
+              transformStyle: 'preserve-3d'
+            }}
           >
-            <img src={logo} alt="Revelation Fund" className="w-64 h-auto object-contain rounded-lg" />
+            <img 
+              src={logo} 
+              alt="Revelation Fund" 
+              className="w-64 h-auto object-contain rounded-lg"
+              style={{
+                backfaceVisibility: 'hidden',
+                filter: 'drop-shadow(0 20px 25px rgba(0, 0, 0, 0.15))',
+              }}
+            />
           </motion.div>
           <motion.div 
             className="flex gap-6 mt-4"
@@ -64,9 +75,35 @@ export default function Hero() {
               rotateX: { duration: 0.3, ease: "easeOut" },
               rotateY: { duration: 0.3, ease: "easeOut" }
             }}
-            style={{ perspective: 1000 }}
+            style={{ 
+              perspective: 1200,
+              transformStyle: 'preserve-3d'
+            }}
           >
-            <a href="https://x.com/revelationfrank?s=21" target="_blank" rel="noopener noreferrer" className="text-black hover:text-gray-600 inline-flex items-center justify-center"><SiX className="text-xl" /></a><a href="https://medium.com/mantra-dao/mantra-dao-entices-institutional-and-retail-investors-from-all-corners-of-the-world-fbace8222e01" target="_blank" rel="noopener noreferrer" className="text-black hover:text-gray-600 inline-flex items-center justify-center"><FaMedium className="text-2xl" /></a>
+            <a 
+              href="https://x.com/revelationfrank?s=21" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-black hover:text-gray-600 inline-flex items-center justify-center"
+              style={{
+                backfaceVisibility: 'hidden',
+                filter: 'drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1))',
+              }}
+            >
+              <SiX className="text-xl" />
+            </a>
+            <a 
+              href="https://medium.com/mantra-dao/mantra-dao-entices-institutional-and-retail-investors-from-all-corners-of-the-world-fbace8222e01" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-black hover:text-gray-600 inline-flex items-center justify-center"
+              style={{
+                backfaceVisibility: 'hidden',
+                filter: 'drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1))',
+              }}
+            >
+              <FaMedium className="text-2xl" />
+            </a>
           </motion.div>
         </motion.div>
       </div>
