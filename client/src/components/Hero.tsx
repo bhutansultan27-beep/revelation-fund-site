@@ -25,7 +25,7 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-20 container mx-auto px-4 h-screen flex flex-col items-center justify-center text-center">
+      <div className="relative z-20 container mx-auto px-4 h-screen flex flex-col items-center justify-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -46,16 +46,17 @@ export default function Hero() {
             <img src={logo} alt="Revelation Fund" className="w-64 h-auto object-contain rounded-lg" />
           </motion.div>
           <motion.div 
-            className="flex gap-6 mt-4"
+            className="flex gap-6 mt-4 justify-center items-center"
             animate={{ 
               x: (mousePos.x - window.innerWidth / 2) * 0.05,
             }}
             transition={{ 
               x: { duration: 0.5, ease: "easeOut" }
             }}
+            style={{ fontSize: 0, overflow: "hidden" }}
           >
-            <a href="https://x.com/revelationfrank?s=21" target="_blank" rel="noopener noreferrer" className="text-black hover:text-gray-600"><SiX className="text-xl" /></a>
-            <a href="https://medium.com/mantra-dao/mantra-dao-entices-institutional-and-retail-investors-from-all-corners-of-the-world-fbace8222e01" target="_blank" rel="noopener noreferrer" className="text-black hover:text-gray-600"><FaMedium className="text-2xl" /></a>
+            <a href="https://x.com/revelationfrank?s=21" target="_blank" rel="noopener noreferrer" className="text-black hover:text-gray-600 inline-block" style={{ fontSize: "1rem" }}><SiX className="text-xl" /></a>
+            <a href="https://medium.com/mantra-dao/mantra-dao-entices-institutional-and-retail-investors-from-all-corners-of-the-world-fbace8222e01" target="_blank" rel="noopener noreferrer" className="text-black hover:text-gray-600 inline-block" style={{ fontSize: "1rem" }}><FaMedium className="text-2xl" /></a>
           </motion.div>
         </motion.div>
       </div>

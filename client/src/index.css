@@ -97,12 +97,12 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* Hide any text content that is just dots or periods */
-body {
-  word-spacing: normal;
+/* Ensure no stray text renders */
+a + a::before {
+  content: none;
 }
 
-:has(+ a) {
-  margin: 0;
-  padding: 0;
+/* Hide any text node that appears to be just punctuation */
+*:not(img):not(svg) {
+  font-feature-settings: normal;
 }
