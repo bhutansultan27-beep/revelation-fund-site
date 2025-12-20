@@ -13,17 +13,21 @@ export default function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-20 container mx-auto px-4 flex flex-col items-center text-center">
+      <div className="relative z-20 container mx-auto px-4 h-screen flex flex-col items-center justify-center text-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
           className="flex flex-col items-center"
         >
-          {/* Logo Only - Centered */}
-          <div className="mb-8"> 
+          {/* Logo Only - Centered and moving with animation */}
+          <motion.div 
+            className="mb-8"
+            animate={{ y: [0, 15, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          > 
              <img src={logo} alt="Revelation Fund" className="w-64 h-auto object-contain rounded-lg" />
-          </div>
+          </motion.div>
           
           {/* Social Links - Minimal Icons below */}
           <div className="flex items-center justify-center gap-6 mt-4">
@@ -47,12 +51,6 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Footer Copy */}
-      <div className="absolute bottom-12 left-0 right-0 text-center">
-        <p className="font-mono text-xs text-gray-500">
-          © {new Date().getFullYear()} Revelation Fund
-        </p>
-      </div>
     </section>
   );
 }
