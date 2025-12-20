@@ -14,7 +14,7 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
       if (vantaEffect) return;
       
       try {
-        const VANTA = await import('vanta/dist/vanta.globe.min') as any;
+        const VANTA = await import('vanta/dist/vanta.rings.min') as any;
         
         if (vantaRef.current && !vantaEffect) {
           const effect = VANTA.default({
@@ -28,12 +28,7 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
             scale: 1.00,
             scaleMobile: 1.00,
             color: 0x1a8f4e,
-            color2: 0x0d4d29,
             backgroundColor: 0xffffff,
-            size: 1,
-            points: 0,
-            maxDistance: 20.00,
-            dotSize: 0,
           });
           
           setVantaEffect(effect);
@@ -53,25 +48,9 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
   }, [vantaEffect]);
 
   return (
-    <>
-      <div 
-        ref={vantaRef} 
-        className={`absolute inset-0 ${className}`}
-      />
-      {/* CSS mask overlay to hide center dot */}
-      <div 
-        className="absolute pointer-events-none"
-        style={{
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: '120px',
-          height: '120px',
-          backgroundColor: 'white',
-          borderRadius: '50%',
-          zIndex: 10,
-        }}
-      />
-    </>
+    <div 
+      ref={vantaRef} 
+      className={`absolute inset-0 ${className}`}
+    />
   );
 }
