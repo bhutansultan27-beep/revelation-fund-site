@@ -65,7 +65,7 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
   return (
     <div 
       ref={vantaRef} 
-      className={`absolute inset-0 ${className}`}
+      className={`absolute inset-0 hidden ${className}`}
     />
   );
 }
