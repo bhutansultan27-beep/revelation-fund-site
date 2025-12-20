@@ -32,8 +32,22 @@ export default function Hero() {
         <VantaGlobe />
       </div>
 
-      {/* White cover box for center point */}
-      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 z-10 w-96 h-80 bg-white"></div>
+      {/* White cover box for center point - follows mouse */}
+      <motion.div 
+        className="absolute left-1/2 top-1/2 z-10 w-24 h-24 bg-white rounded-full transform -translate-x-1/2 -translate-y-1/2"
+        animate={{ 
+          rotateX: rotation.x,
+          rotateY: rotation.y,
+        }}
+        transition={{ 
+          rotateX: { duration: 0.3, ease: "easeOut" },
+          rotateY: { duration: 0.3, ease: "easeOut" }
+        }}
+        style={{ 
+          perspective: 1200,
+          transformStyle: 'preserve-3d'
+        }}
+      />
 
       {/* Content */}
       <div className="relative z-20 container mx-auto px-4 h-screen flex flex-col items-center justify-center">
