@@ -60,7 +60,6 @@ export default function Hero() {
               alt="Revelation Fund" 
               className="w-64 h-auto object-contain rounded-lg"
               style={{
-                backfaceVisibility: 'hidden',
                 filter: 'drop-shadow(0 20px 25px rgba(0, 0, 0, 0.15))',
               }}
             />
@@ -86,7 +85,6 @@ export default function Hero() {
               rel="noopener noreferrer" 
               className="text-black hover:text-gray-600 inline-flex items-center justify-center"
               style={{
-                backfaceVisibility: 'hidden',
                 filter: 'drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1))',
               }}
             >
@@ -98,7 +96,6 @@ export default function Hero() {
               rel="noopener noreferrer" 
               className="text-black hover:text-gray-600 inline-flex items-center justify-center"
               style={{
-                backfaceVisibility: 'hidden',
                 filter: 'drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1))',
               }}
             >
