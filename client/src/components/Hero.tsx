@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { FaMedium } from "react-icons/fa";
 import { SiX } from "react-icons/si"; 
 import logo from "@assets/d7875c16-a616-404e-a523-fbbd4ebe6785-removebg-preview_1765559681672.png";
-import AnimatedBackground from "./AnimatedBackground";
+import VantaGlobe from "./VantaGlobe";
 import { useState, useEffect } from "react";
 
 export default function Hero() {
@@ -19,7 +19,9 @@ export default function Hero() {
 
   return (
     <section id="hero" className="relative h-screen w-full flex items-center justify-center bg-white overflow-hidden">
-      <AnimatedBackground />
+      <div className="absolute inset-0 z-0">
+        <VantaGlobe />
+      </div>
 
       {/* Content */}
       <div className="relative z-20 container mx-auto px-4 h-screen flex flex-col items-center justify-center">
