@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 
-declare module 'vanta/dist/vanta.waves.min' {
+declare module 'vanta/dist/vanta.globe.min' {
   const VANTA: any;
   export default VANTA;
 }
@@ -25,7 +25,7 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
       if (vantaEffect) return;
       
       try {
-        const VANTA = await import('vanta/dist/vanta.waves.min');
+        const VANTA = await import('vanta/dist/vanta.globe.min');
         
         if (vantaRef.current && !vantaEffect) {
           const effect = VANTA.default({
@@ -39,11 +39,33 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
             scale: 1.00,
             scaleMobile: 1.00,
             color: 0x1a8f4e,
+            color2: 0x0d4d29,
             backgroundColor: 0xffffff,
-            waveHeight: 15,
-            waveSpeed: 0.5,
-            zoom: 1,
+            size: 1,
+            points: 0,
+            maxDistance: 20.00,
+            dotSize: 0,
           });
+          
+          // Continuously hide the globe sphere by making its material transparent
+          const hideGlobe = () => {
+            if (effect.scene) {
+              effect.scene.traverse((object: any) => {
+                if (object.isMesh && object.geometry?.type === 'IcosahedronGeometry') {
+                  object.visible = false;
+                }
+              });
+            }
+          };
+          
+          hideGlobe();
+          const hideInterval = setInterval(hideGlobe, 100);
+          
+          const originalDestroy = effect.destroy.bind(effect);
+          effect.destroy = () => {
+            clearInterval(hideInterval);
+            originalDestroy();
+          };
           
           setVantaEffect(effect);
         }
