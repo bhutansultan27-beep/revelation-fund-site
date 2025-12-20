@@ -97,12 +97,3 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* Ensure no stray text renders */
-a + a::before {
-  content: none;
-}
-
-/* Hide any text node that appears to be just punctuation */
-*:not(img):not(svg) {
-  font-feature-settings: normal;
-}
