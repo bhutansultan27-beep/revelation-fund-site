@@ -28,7 +28,7 @@ export default function Hero() {
 
   return (
     <section id="hero" className="relative h-screen w-full flex items-center justify-center bg-white overflow-hidden">
-      <div className="absolute inset-0 z-0">
+      <div className="absolute left-0 top-0 bottom-0 w-1/2 z-0">
         <VantaGlobe />
       </div>
 
