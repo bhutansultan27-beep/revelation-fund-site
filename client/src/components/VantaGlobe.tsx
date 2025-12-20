@@ -8,14 +8,13 @@ interface VantaGlobeProps {
 export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
   const vantaRef = useRef<HTMLDivElement>(null);
   const [vantaEffect, setVantaEffect] = useState<any>(null);
-  const hideIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const loadVanta = async () => {
       if (vantaEffect) return;
       
       try {
-        const VANTA = await import('vanta/dist/vanta.globe.min');
+        const VANTA = await import('vanta/dist/vanta.globe.min') as any;
         
         if (vantaRef.current && !vantaEffect) {
           const effect = VANTA.default({
@@ -37,47 +36,6 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
             dotSize: 0,
           });
           
-          // Function to remove the center sphere mesh
-          const removeCenterSphere = () => {
-            if (effect.scene) {
-              const objectsToRemove: THREE.Object3D[] = [];
-              
-              effect.scene.traverse((object: any) => {
-                // Look for the sphere geometry that creates the dot
-                if (object.isMesh && object.geometry) {
-                  const geom = object.geometry;
-                  
-                  // The center sphere is typically an IcosahedronGeometry
-                  // or has vertex count around 12-42 for a simple sphere
-                  if (
-                    geom.type === 'IcosahedronGeometry' ||
-                    (geom.attributes.position && 
-                     geom.attributes.position.count < 100 &&
-                     object.position.length() < 1)
-                  ) {
-                    objectsToRemove.push(object);
-                  }
-                }
-              });
-              
-              // Remove all identified center sphere meshes
-              objectsToRemove.forEach(obj => {
-                if (obj.parent) {
-                  obj.parent.remove(obj);
-                }
-              });
-            }
-          };
-          
-          // Remove on first render
-          setTimeout(removeCenterSphere, 50);
-          
-          // Keep removing it periodically in case it regenerates
-          if (hideIntervalRef.current) {
-            clearInterval(hideIntervalRef.current);
-          }
-          hideIntervalRef.current = setInterval(removeCenterSphere, 200);
-          
           setVantaEffect(effect);
         }
       } catch (error) {
@@ -88,20 +46,25 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
     loadVanta();
 
     return () => {
-      if (hideIntervalRef.current) {
-        clearInterval(hideIntervalRef.current);
-      }
       if (vantaEffect) {
         vantaEffect.destroy();
-        setVantaEffect(null);
       }
     };
   }, [vantaEffect]);
 
   return (
-    <div 
-      ref={vantaRef} 
-      className={`absolute inset-0 ${className}`}
-    />
+    <>
+      <div 
+        ref={vantaRef} 
+        className={`absolute inset-0 ${className}`}
+      />
+      {/* CSS mask overlay to hide center dot */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle 25px at center, white 0%, transparent 100%)',
+        }}
+      />
+    </>
   );
 }
