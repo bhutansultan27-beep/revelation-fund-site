@@ -32,7 +32,6 @@ export default function Hero() {
           transition={{ duration: 1.2, ease: "easeOut" }}
           className="flex flex-col items-center"
         >
-          {/* Logo Only - Centered and moving with animation */}
           <motion.div 
             className="mb-8"
             animate={{ 
@@ -43,13 +42,11 @@ export default function Hero() {
               y: { duration: 4, repeat: Infinity, ease: "easeInOut" },
               x: { duration: 0.5, ease: "easeOut" }
             }}
-          > 
-             <img src={logo} alt="Revelation Fund" className="w-64 h-auto object-contain rounded-lg" />
+          >
+            <img src={logo} alt="Revelation Fund" className="w-64 h-auto object-contain rounded-lg" />
           </motion.div>
-          
-          {/* Social Links - Minimal Icons below */}
           <motion.div 
-            className="flex items-center justify-center gap-6 mt-4"
+            className="flex gap-6 mt-4"
             animate={{ 
               x: (mousePos.x - window.innerWidth / 2) * 0.05,
             }}
@@ -57,22 +54,8 @@ export default function Hero() {
               x: { duration: 0.5, ease: "easeOut" }
             }}
           >
-            <a 
-              href="https://x.com/revelationfrank?s=21" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-black hover:text-gray-600 transition-colors duration-300 decoration-none"
-            >
-              <SiX className="text-xl" />
-            </a>
-            <a 
-              href="https://medium.com/mantra-dao/mantra-dao-entices-institutional-and-retail-investors-from-all-corners-of-the-world-fbace8222e01" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-black hover:text-gray-600 transition-colors duration-300 decoration-none"
-            >
-              <FaMedium className="text-2xl" />
-            </a>
+            <a href="https://x.com/revelationfrank?s=21" target="_blank" rel="noopener noreferrer" className="text-black hover:text-gray-600"><SiX className="text-xl" /></a>
+            <a href="https://medium.com/mantra-dao/mantra-dao-entices-institutional-and-retail-investors-from-all-corners-of-the-world-fbace8222e01" target="_blank" rel="noopener noreferrer" className="text-black hover:text-gray-600"><FaMedium className="text-2xl" /></a>
           </motion.div>
         </motion.div>
       </div>

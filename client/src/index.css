@@ -96,3 +96,13 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* Hide any text content that is just dots or periods */
+body {
+  word-spacing: normal;
+}
+
+:has(+ a) {
+  margin: 0;
+  padding: 0;
+}
