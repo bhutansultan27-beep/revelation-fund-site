@@ -22,7 +22,7 @@ export default function GeometricBackground() {
       const centerY = height / 2;
       const size = Math.min(width, height) * 0.35; // Size of the shape
 
-      ctx.strokeStyle = '#000000';
+      ctx.strokeStyle = '#ffffff';
       ctx.lineWidth = 1; // Very thin lines
 
       // Draw rotating geometric shape (Wireframe Crystal)
