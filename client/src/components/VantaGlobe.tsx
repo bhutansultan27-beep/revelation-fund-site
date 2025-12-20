@@ -7,140 +7,84 @@ interface VantaGlobeProps {
 
 export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const sceneRef = useRef<THREE.Scene | null>(null);
-  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
-  const particlesRef = useRef<THREE.Points | null>(null);
-  const mouseRef = useRef({ x: 0, y: 0 });
+  const mouseRef = useRef({ x: 0.5, y: 0.5 });
 
   useEffect(() => {
     if (!containerRef.current) return;
 
-    // Scene setup
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xffffff);
-    sceneRef.current = scene;
 
-    // Camera setup
     const width = window.innerWidth;
     const height = window.innerHeight;
-    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-    camera.position.z = 50;
+    const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 2000);
+    camera.position.z = 100;
 
-    // Renderer setup
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     renderer.setSize(width, height);
     renderer.setPixelRatio(window.devicePixelRatio);
     containerRef.current.appendChild(renderer.domElement);
-    rendererRef.current = renderer;
 
-    // Create interactive particles
-    const particleCount = 300;
-    const positions = new Float32Array(particleCount * 3);
-    const velocity = new Float32Array(particleCount * 3);
+    // Create animated flowing mesh
+    const geometry = new THREE.IcosahedronGeometry(30, 6);
+    const positions = geometry.getAttribute('position') as THREE.BufferAttribute;
+    const originalPositions = positions.array.slice() as any;
 
-    for (let i = 0; i < particleCount * 3; i += 3) {
-      positions[i] = (Math.random() - 0.5) * 100;
-      positions[i + 1] = (Math.random() - 0.5) * 100;
-      positions[i + 2] = (Math.random() - 0.5) * 100;
-
-      velocity[i] = (Math.random() - 0.5) * 0.3;
-      velocity[i + 1] = (Math.random() - 0.5) * 0.3;
-      velocity[i + 2] = (Math.random() - 0.5) * 0.3;
-    }
-
-    const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
-    const material = new THREE.PointsMaterial({
+    const material = new THREE.MeshPhongMaterial({
       color: 0x1a8f4e,
-      size: 0.8,
-      sizeAttenuation: true,
+      emissive: 0x0d4d29,
+      wireframe: false,
+      shininess: 100,
+      flatShading: true,
     });
 
-    const particles = new THREE.Points(geometry, material);
-    scene.add(particles);
-    particlesRef.current = particles;
+    const mesh = new THREE.Mesh(geometry, material);
+    scene.add(mesh);
 
-    // Create connecting lines
-    const lineGeometry = new THREE.BufferGeometry();
-    const linePositions: number[] = [];
+    // Lighting
+    const light1 = new THREE.DirectionalLight(0xffffff, 1);
+    light1.position.set(50, 50, 50);
+    scene.add(light1);
 
-    for (let i = 0; i < particleCount; i += 5) {
-      for (let j = i + 5; j < particleCount; j += 5) {
-        const dx = positions[i * 3] - positions[j * 3];
-        const dy = positions[i * 3 + 1] - positions[j * 3 + 1];
-        const dz = positions[i * 3 + 2] - positions[j * 3 + 2];
-        const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
+    const light2 = new THREE.DirectionalLight(0x1a8f4e, 0.5);
+    light2.position.set(-50, -50, 50);
+    scene.add(light2);
 
-        if (dist < 30) {
-          linePositions.push(positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2]);
-          linePositions.push(positions[j * 3], positions[j * 3 + 1], positions[j * 3 + 2]);
-        }
-      }
-    }
-
-    lineGeometry.setAttribute('position', new THREE.BufferAttribute(new Float32Array(linePositions), 3));
-    const lineMaterial = new THREE.LineBasicMaterial({
-      color: 0x0d4d29,
-      transparent: true,
-      opacity: 0.3,
-      linewidth: 1,
-    });
-    const lines = new THREE.LineSegments(lineGeometry, lineMaterial);
-    scene.add(lines);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    scene.add(ambientLight);
 
     // Mouse tracking
     const onMouseMove = (e: MouseEvent) => {
-      mouseRef.current.x = (e.clientX / width) * 2 - 1;
-      mouseRef.current.y = -(e.clientY / height) * 2 + 1;
+      mouseRef.current.x = e.clientX / width;
+      mouseRef.current.y = e.clientY / height;
     };
 
     window.addEventListener('mousemove', onMouseMove);
 
+    let animationTime = 0;
+
     // Animation loop
     const animate = () => {
       requestAnimationFrame(animate);
+      animationTime += 0.01;
 
-      if (particles && particlesRef.current) {
-        const posAttr = geometry.getAttribute('position');
-        const pos = posAttr.array as Float32Array;
-
-        // Update particle positions
-        for (let i = 0; i < particleCount; i++) {
-          const idx = i * 3;
-          
-          // Add velocity
-          pos[idx] += velocity[idx];
-          pos[idx + 1] += velocity[idx + 1];
-          pos[idx + 2] += velocity[idx + 2];
-
-          // Mouse attraction
-          const dx = mouseRef.current.x * 30 - pos[idx];
-          const dy = mouseRef.current.y * 30 - pos[idx + 1];
-          const dist = Math.sqrt(dx * dx + dy * dy);
-
-          if (dist < 40) {
-            const force = (40 - dist) / 40 * 0.02;
-            velocity[idx] += (dx / dist) * force;
-            velocity[idx + 1] += (dy / dist) * force;
-          }
-
-          // Damping
-          velocity[idx] *= 0.98;
-          velocity[idx + 1] *= 0.98;
-          velocity[idx + 2] *= 0.98;
-
-          // Bounds
-          if (pos[idx] > 50) pos[idx] = -50;
-          if (pos[idx] < -50) pos[idx] = 50;
-          if (pos[idx + 1] > 50) pos[idx + 1] = -50;
-          if (pos[idx + 1] < -50) pos[idx + 1] = 50;
-          if (pos[idx + 2] > 50) pos[idx + 2] = -50;
-          if (pos[idx + 2] < -50) pos[idx + 2] = 50;
-        }
-
-        posAttr.needsUpdate = true;
+      // Deform geometry
+      const pos = positions.array as Float32Array;
+      for (let i = 0; i < originalPositions.length; i++) {
+        const original = originalPositions[i];
+        const wave1 = Math.sin(original / 20 + animationTime) * 3;
+        const wave2 = Math.cos(original / 15 + animationTime * 0.7) * 2;
+        pos[i] = original + wave1 + wave2;
       }
+      positions.needsUpdate = true;
+
+      // Rotate and follow mouse
+      mesh.rotation.x += 0.0005;
+      mesh.rotation.y += 0.001;
+      
+      // Mouse influence
+      mesh.rotation.x += (mouseRef.current.y - 0.5) * 0.3;
+      mesh.rotation.y += (mouseRef.current.x - 0.5) * 0.3;
 
       renderer.render(scene, camera);
     };
@@ -161,11 +105,11 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('resize', onResize);
-      containerRef.current?.removeChild(renderer.domElement);
+      if (containerRef.current?.contains(renderer.domElement)) {
+        containerRef.current.removeChild(renderer.domElement);
+      }
       geometry.dispose();
       material.dispose();
-      lineGeometry.dispose();
-      lineMaterial.dispose();
       renderer.dispose();
     };
   }, []);
