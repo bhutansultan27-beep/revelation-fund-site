@@ -44,6 +44,29 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
           dotSize: 0,
         });
 
+        // Remove the center sphere mesh
+        const removeSphere = () => {
+          if (effect.scene) {
+            const toRemove: THREE.Object3D[] = [];
+            effect.scene.traverse((obj: any) => {
+              if (obj.isMesh && obj.geometry?.type === 'IcosahedronGeometry') {
+                toRemove.push(obj);
+              }
+            });
+            toRemove.forEach(obj => {
+              if (obj.parent) obj.parent.remove(obj);
+            });
+          }
+        };
+
+        setTimeout(removeSphere, 100);
+        const interval = setInterval(removeSphere, 500);
+        const originalDestroy = effect.destroy.bind(effect);
+        effect.destroy = () => {
+          clearInterval(interval);
+          originalDestroy();
+        };
+
         effectRefValue.current = effect;
       } catch (error) {
         console.error('Failed to load Vanta effect:', error);
