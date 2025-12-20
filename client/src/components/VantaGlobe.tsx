@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 
-declare module 'vanta/dist/vanta.globe.min' {
+declare module 'vanta/dist/vanta.net.min' {
   const VANTA: any;
   export default VANTA;
 }
@@ -25,7 +25,7 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
       if (vantaEffect) return;
       
       try {
-        const VANTA = await import('vanta/dist/vanta.globe.min');
+        const VANTA = await import('vanta/dist/vanta.net.min');
         
         if (vantaRef.current && !vantaEffect) {
           const effect = VANTA.default({
@@ -39,25 +39,11 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
             scale: 1.00,
             scaleMobile: 1.00,
             color: 0x1a8f4e,
-            color2: 0x0d4d29,
             backgroundColor: 0xffffff,
-            size: 1,
-            points: 0,
+            points: 15,
             maxDistance: 20.00,
-            dotSize: 0,
+            speed: 1,
           });
-          
-          // Remove the globe mesh from the scene after effect initializes
-          setTimeout(() => {
-            if (effect.scene) {
-              effect.scene.traverse((object: any) => {
-                // Remove globe geometry (typically a sphere mesh)
-                if (object.geometry && object.geometry.type === 'IcosahedronGeometry') {
-                  effect.scene.remove(object);
-                }
-              });
-            }
-          }, 100);
           
           setVantaEffect(effect);
         }
