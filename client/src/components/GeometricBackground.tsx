@@ -40,12 +40,6 @@ export default function GeometricBackground() {
         });
       }
       
-      // Center point (slightly moving)
-      const centerPoint = {
-        x: centerX + Math.sin(time * 0.5) * 20,
-        y: centerY + Math.cos(time * 0.5) * 20
-      };
-
       // Draw outer polygon
       ctx.moveTo(points[0].x, points[0].y);
       for (let i = 1; i < points.length; i++) {
@@ -53,14 +47,6 @@ export default function GeometricBackground() {
       }
       ctx.closePath();
       ctx.stroke();
-
-      // Connect all points to center
-      points.forEach(point => {
-        ctx.beginPath();
-        ctx.moveTo(point.x, point.y);
-        ctx.lineTo(centerPoint.x, centerPoint.y);
-        ctx.stroke();
-      });
 
       // Connect alternating points (internal structure)
       for(let i = 0; i < points.length; i++) {
