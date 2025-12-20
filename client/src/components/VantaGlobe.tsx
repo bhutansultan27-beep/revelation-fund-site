@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 
-declare module 'vanta/dist/vanta.net.min' {
+declare module 'vanta/dist/vanta.clouds.min' {
   const VANTA: any;
   export default VANTA;
 }
@@ -25,7 +25,7 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
       if (vantaEffect) return;
       
       try {
-        const VANTA = await import('vanta/dist/vanta.net.min');
+        const VANTA = await import('vanta/dist/vanta.clouds.min');
         
         if (vantaRef.current && !vantaEffect) {
           const effect = VANTA.default({
@@ -38,11 +38,8 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
             minWidth: 200.00,
             scale: 1.00,
             scaleMobile: 1.00,
-            color: 0x1a8f4e,
             backgroundColor: 0xffffff,
-            points: 15,
-            maxDistance: 20.00,
-            speed: 1,
+            speed: 2,
           });
           
           setVantaEffect(effect);
