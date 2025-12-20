@@ -49,7 +49,7 @@ export default function Hero() {
           
           {/* Social Links - Minimal Icons below */}
           <motion.div 
-            className="flex items-center justify-center gap-6 mt-4 list-none"
+            className="flex items-center justify-center gap-6 mt-4"
             animate={{ 
               x: (mousePos.x - window.innerWidth / 2) * 0.05,
             }}
@@ -61,7 +61,7 @@ export default function Hero() {
               href="https://x.com/revelationfrank?s=21" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-black hover:text-gray-600 transition-colors duration-300"
+              className="text-black hover:text-gray-600 transition-colors duration-300 decoration-none"
             >
               <SiX className="text-xl" />
             </a>
@@ -69,7 +69,7 @@ export default function Hero() {
               href="https://medium.com/mantra-dao/mantra-dao-entices-institutional-and-retail-investors-from-all-corners-of-the-world-fbace8222e01" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-black hover:text-gray-600 transition-colors duration-300"
+              className="text-black hover:text-gray-600 transition-colors duration-300 decoration-none"
             >
               <FaMedium className="text-2xl" />
             </a>
