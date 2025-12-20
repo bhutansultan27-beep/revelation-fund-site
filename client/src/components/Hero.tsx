@@ -2,9 +2,21 @@ import { motion } from "framer-motion";
 import { FaMedium } from "react-icons/fa";
 import { SiX } from "react-icons/si"; 
 import logo from "@assets/d7875c16-a616-404e-a523-fbbd4ebe6785-removebg-preview_1765559681672.png";
-import VantaGlobe from "./VantaGlobe"; 
+import VantaGlobe from "./VantaGlobe";
+import { useState, useEffect } from "react";
 
 export default function Hero() {
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({ x: e.clientX, y: e.clientY });
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
   return (
     <section id="hero" className="relative h-screen w-full flex items-center justify-center bg-white overflow-hidden">
       {/* Vanta Globe Background - positioned to the right */}
@@ -23,8 +35,14 @@ export default function Hero() {
           {/* Logo Only - Centered and moving with animation */}
           <motion.div 
             className="mb-8"
-            animate={{ y: [0, 15, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            animate={{ 
+              y: [0, 15, 0],
+              x: (mousePos.x - window.innerWidth / 2) * 0.05,
+            }}
+            transition={{ 
+              y: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+              x: { duration: 0.5, ease: "easeOut" }
+            }}
           > 
              <img src={logo} alt="Revelation Fund" className="w-64 h-auto object-contain rounded-lg" />
           </motion.div>
