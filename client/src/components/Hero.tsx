@@ -34,11 +34,9 @@ export default function Hero() {
           <motion.div 
             className="mb-8"
             animate={{ 
-              y: [0, 15, 0],
               x: (mousePos.x - window.innerWidth / 2) * 0.05,
             }}
             transition={{ 
-              y: { duration: 4, repeat: Infinity, ease: "easeInOut" },
               x: { duration: 0.5, ease: "easeOut" }
             }}
           >

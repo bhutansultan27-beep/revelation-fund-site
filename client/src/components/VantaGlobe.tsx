@@ -41,8 +41,8 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
             color: 0x1a8f4e,
             color2: 0x0d4d29,
             backgroundColor: 0xffffff,
-            size: 1.00,
-            points: 15.00,
+            size: 0,
+            points: 0,
             maxDistance: 20.00,
             dotSize: 0,
           });
