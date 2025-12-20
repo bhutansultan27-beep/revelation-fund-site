@@ -59,9 +59,6 @@ export default function Hero() {
               src={logo} 
               alt="Revelation Fund" 
               className="w-64 h-auto object-contain rounded-lg"
-              style={{
-                filter: 'drop-shadow(0 20px 25px rgba(0, 0, 0, 0.15))',
-              }}
             />
           </motion.div>
           <motion.div 
