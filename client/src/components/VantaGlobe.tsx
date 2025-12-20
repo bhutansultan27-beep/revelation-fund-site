@@ -60,9 +60,16 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
       />
       {/* CSS mask overlay to hide center dot */}
       <div 
-        className="absolute inset-0 pointer-events-none"
+        className="absolute pointer-events-none"
         style={{
-          background: 'radial-gradient(circle 25px at center, white 0%, transparent 100%)',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '120px',
+          height: '120px',
+          backgroundColor: 'white',
+          borderRadius: '50%',
+          zIndex: 10,
         }}
       />
     </>
