@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 
-declare module 'vanta/dist/vanta.topology.min' {
+declare module 'vanta/dist/vanta.waves.min' {
   const VANTA: any;
   export default VANTA;
 }
@@ -25,7 +25,7 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
       if (vantaEffect) return;
       
       try {
-        const VANTA = await import('vanta/dist/vanta.topology.min');
+        const VANTA = await import('vanta/dist/vanta.waves.min');
         
         if (vantaRef.current && !vantaEffect) {
           const effect = VANTA.default({
@@ -40,7 +40,9 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
             scaleMobile: 1.00,
             color: 0x1a8f4e,
             backgroundColor: 0xffffff,
-            wireframe: false,
+            waveHeight: 15,
+            waveSpeed: 0.5,
+            zoom: 1,
           });
           
           setVantaEffect(effect);
