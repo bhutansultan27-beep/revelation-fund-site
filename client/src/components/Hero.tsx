@@ -32,23 +32,6 @@ export default function Hero() {
         <VantaGlobe />
       </div>
 
-      {/* White cover box that follows the globe center point */}
-      <motion.div 
-        className="absolute z-50 w-32 h-32 bg-white rounded-full transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
-        style={{
-          left: '25%',
-          top: '50%',
-        }}
-        animate={{
-          x: (rotation.y / 240) * 30,
-          y: (rotation.x / 240) * 30,
-        }}
-        transition={{
-          x: { duration: 0.3, ease: "easeOut" },
-          y: { duration: 0.3, ease: "easeOut" }
-        }}
-      />
-
       {/* Content */}
       <div className="relative z-20 container mx-auto px-4 h-screen flex flex-col items-center justify-center">
         <motion.div
