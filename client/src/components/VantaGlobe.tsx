@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
 interface VantaGlobeProps {
@@ -69,7 +69,11 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
 
         effectRefValue.current = effect;
       } catch (error) {
+        // Gracefully handle WebGL errors - provide fallback background
         console.error('Failed to load Vanta effect:', error);
+        if (vantaRef.current) {
+          vantaRef.current.style.background = 'linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%)';
+        }
       }
     };
 
