@@ -38,19 +38,36 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
           color: 0x22c55e,
           color2: 0x16a34a,
           backgroundColor: 0xffffff,
-          size: 1,
+          size: 0,
           points: 0,
           maxDistance: 20.00,
           dotSize: 0,
         });
 
-        // Remove the center sphere mesh
+        // Remove the center sphere mesh and any remaining dots
         const removeSphere = () => {
           if (effect.scene) {
             const toRemove: THREE.Object3D[] = [];
             effect.scene.traverse((obj: any) => {
+              // Remove icosahedron geometry (center sphere)
               if (obj.isMesh && obj.geometry?.type === 'IcosahedronGeometry') {
+                console.log('Removing IcosahedronGeometry');
                 toRemove.push(obj);
+              }
+              // Remove any other sphere-like meshes with small radius at center
+              if (obj.isMesh && obj.geometry?.type === 'SphereGeometry') {
+                console.log('Removing SphereGeometry');
+                toRemove.push(obj);
+              }
+              // Remove BufferGeometry that might be a single point or small dot
+              if (obj.isMesh && obj.geometry?.type === 'BufferGeometry') {
+                const positions = obj.geometry?.attributes?.position;
+                const vertexCount = positions?.count || 0;
+                // Log all buffer geometries to see what's there
+                if (vertexCount <= 4) {
+                  console.log('Removing small BufferGeometry with', vertexCount, 'vertices');
+                  toRemove.push(obj);
+                }
               }
             });
             toRemove.forEach(obj => {
