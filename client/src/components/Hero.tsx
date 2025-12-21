@@ -32,9 +32,9 @@ export default function Hero() {
         <VantaGlobe />
       </div>
 
-      {/* White cover box for center point */}
+      {/* White cover box for center point - invisible but covers the globe center */}
       <motion.div 
-        className="absolute left-1/2 top-1/2 z-10 w-32 h-32 bg-white rounded-full transform -translate-x-1/2 -translate-y-1/2"
+        className="absolute left-1/2 top-1/2 z-10 w-32 h-32 bg-white rounded-full transform -translate-x-1/2 -translate-y-1/2 invisible"
         animate={{ 
           rotateX: rotation.x,
           rotateY: rotation.y,
