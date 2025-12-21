@@ -34,10 +34,10 @@ export default function Hero() {
 
       {/* White cover box that follows the globe center point */}
       <motion.div 
-        className="absolute z-20 w-32 h-32 bg-white rounded-full"
+        className="absolute z-20 w-32 h-32 bg-white rounded-full transform -translate-x-1/2 -translate-y-1/2"
         style={{
-          top: 'calc(50% + 60px)',
-          right: '20%',
+          left: '50%',
+          top: '50%',
         }}
         animate={{
           x: (rotation.y / 240) * 20,
