@@ -32,12 +32,20 @@ export default function Hero() {
         <VantaGlobe />
       </div>
 
-      {/* White cover box positioned below M link - static, doesn't rotate */}
-      <div 
-        className="absolute z-20 w-48 h-48 bg-white rounded-full"
+      {/* White cover box that follows the globe center point */}
+      <motion.div 
+        className="absolute z-20 w-32 h-32 bg-white rounded-full"
         style={{
           top: 'calc(50% + 60px)',
           right: '20%',
+        }}
+        animate={{
+          x: (rotation.y / 240) * 20,
+          y: (rotation.x / 240) * 20,
+        }}
+        transition={{
+          x: { duration: 0.3, ease: "easeOut" },
+          y: { duration: 0.3, ease: "easeOut" }
         }}
       />
 
