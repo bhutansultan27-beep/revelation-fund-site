@@ -38,10 +38,10 @@ export default function VantaGlobe({ className = '' }: VantaGlobeProps) {
           color: 0x22c55e,
           color2: 0x16a34a,
           backgroundColor: 0xffffff,
-          size: 0.5,
-          points: -1,
+          size: 1,
+          points: 0,
           maxDistance: 20.00,
-          dotSize: -1,
+          dotSize: 0,
         });
 
         // Remove the center sphere mesh

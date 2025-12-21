@@ -32,21 +32,11 @@ export default function Hero() {
         <VantaGlobe />
       </div>
 
-      {/* White cover box positioned below M link */}
-      <motion.div 
+      {/* White cover box positioned below M link - static, doesn't rotate */}
+      <div 
         className="absolute left-1/2 z-20 w-96 h-96 bg-white rounded-full transform -translate-x-1/2"
         style={{
           top: 'calc(50% + 120px)',
-          perspective: 1200,
-          transformStyle: 'preserve-3d'
-        }}
-        animate={{ 
-          rotateX: rotation.x,
-          rotateY: rotation.y,
-        }}
-        transition={{ 
-          rotateX: { duration: 0.3, ease: "easeOut" },
-          rotateY: { duration: 0.3, ease: "easeOut" }
         }}
       />
 
