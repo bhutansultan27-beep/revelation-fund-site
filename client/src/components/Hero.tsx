@@ -34,7 +34,7 @@ export default function Hero() {
 
       {/* White cover box positioned below M link - static, doesn't rotate */}
       <div 
-        className="absolute z-20 w-24 h-24 bg-white rounded-full"
+        className="absolute z-20 w-48 h-48 bg-white rounded-full"
         style={{
           top: 'calc(50% + 60px)',
           right: '20%',
