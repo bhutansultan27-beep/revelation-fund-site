@@ -34,14 +34,14 @@ export default function Hero() {
 
       {/* White cover box that follows the globe center point */}
       <motion.div 
-        className="absolute z-20 w-32 h-32 bg-white rounded-full transform -translate-x-1/2 -translate-y-1/2"
+        className="absolute z-50 w-32 h-32 bg-white rounded-full transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
         style={{
           left: '50%',
           top: '50%',
         }}
         animate={{
-          x: (rotation.y / 240) * 20,
-          y: (rotation.x / 240) * 20,
+          x: (rotation.y / 240) * 25,
+          y: (rotation.x / 240) * 25,
         }}
         transition={{
           x: { duration: 0.3, ease: "easeOut" },
