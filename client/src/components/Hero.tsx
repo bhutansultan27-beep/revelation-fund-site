@@ -36,12 +36,12 @@ export default function Hero() {
       <motion.div 
         className="absolute z-50 w-32 h-32 bg-white rounded-full transform -translate-x-1/2 -translate-y-1/2 pointer-events-none"
         style={{
-          left: '50%',
+          left: '25%',
           top: '50%',
         }}
         animate={{
-          x: (rotation.y / 240) * 25,
-          y: (rotation.x / 240) * 25,
+          x: (rotation.y / 240) * 30,
+          y: (rotation.x / 240) * 30,
         }}
         transition={{
           x: { duration: 0.3, ease: "easeOut" },
