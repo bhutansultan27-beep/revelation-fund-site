@@ -39,13 +39,6 @@ export default function About() {
           </motion.p>
         </div>
       </div>
-      
-      {/* Footer Copy */}
-      <div className="absolute bottom-12 left-0 right-0 text-center">
-        <p className="font-mono text-xs text-gray-500">
-          © {new Date().getFullYear()} Revelation Fund
-        </p>
-      </div>
     </section>
   );
 }
