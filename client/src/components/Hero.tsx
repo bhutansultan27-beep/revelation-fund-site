@@ -49,7 +49,7 @@ export default function Hero() {
             <img 
               src={logo} 
               alt="Revelation Fund" 
-              className="w-96 h-auto object-contain rounded-lg"
+              className="w-80 h-auto object-contain rounded-lg"
             />
           </motion.div>
           <motion.div 
