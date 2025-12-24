@@ -42,39 +42,21 @@ export default function Hero() {
         >
           <motion.div 
             className="mb-8"
-            animate={{ 
-              rotateX: rotation.x,
-              rotateY: rotation.y,
-            }}
-            transition={{ 
-              rotateX: { duration: 0.3, ease: "easeOut" },
-              rotateY: { duration: 0.3, ease: "easeOut" }
-            }}
-            style={{ 
-              perspective: 1200,
-              transformStyle: 'preserve-3d'
-            }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <img 
               src={logo} 
               alt="Revelation Fund" 
-              className="w-64 h-auto object-contain rounded-lg"
+              className="w-96 h-auto object-contain rounded-lg"
             />
           </motion.div>
           <motion.div 
             className="flex gap-6 mt-4"
-            animate={{ 
-              rotateX: rotation.x,
-              rotateY: rotation.y,
-            }}
-            transition={{ 
-              rotateX: { duration: 0.3, ease: "easeOut" },
-              rotateY: { duration: 0.3, ease: "easeOut" }
-            }}
-            style={{ 
-              perspective: 1200,
-              transformStyle: 'preserve-3d'
-            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <a 
               href="https://x.com/revelationfrank?s=21" 
