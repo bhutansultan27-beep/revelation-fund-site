@@ -72,7 +72,7 @@ const projects = [
   {
     name: "Binance",
     url: "https://binance.com",
-    logo: "/binance-logo.png",
+    logo: "/binance-logo.webp",
     description: "The world's leading cryptocurrency exchange.",
   },
   {
