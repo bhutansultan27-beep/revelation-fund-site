@@ -11,7 +11,7 @@ const ProjectLogo = ({ name, url, logo }: { name: string, url: string, logo?: st
        <img 
          src={logo || `https://logo.clearbit.com/${domain}`} 
          alt={`${name} logo`}
-         className={`w-auto h-auto object-contain group-hover:opacity-100 transition-all duration-300 ${
+         className={`w-auto h-auto object-contain group-hover:opacity-100 transition-all duration-300 invert brightness-0 ${
            isComputeLabs ? "max-w-[240px] max-h-[120px] scale-100" : "max-w-[320px] max-h-[160px] scale-125"
          }`}
          onError={(e) => {
@@ -52,6 +52,7 @@ const projects = [
   {
     name: "Yona Network",
     url: "https://yona.network/",
+    logo: "/yona-network-logo.webp",
     description: "Bitcoin Layer 2 scaling solution.",
   },
   {
