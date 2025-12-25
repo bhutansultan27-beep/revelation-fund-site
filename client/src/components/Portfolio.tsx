@@ -6,6 +6,7 @@ const ProjectLogo = ({ name, url, logo }: { name: string, url: string, logo?: st
   const domain = new URL(url).hostname;
   const isComputeLabs = name === "Compute Labs";
   const isYonaNetwork = name === "Yona Network";
+  const isEigenLayer = name === "EigenLayer";
   
   return (
     <div className="w-full flex items-center justify-center h-48 mb-6">
@@ -13,7 +14,7 @@ const ProjectLogo = ({ name, url, logo }: { name: string, url: string, logo?: st
          src={logo || `https://logo.clearbit.com/${domain}`} 
          alt={`${name} logo`}
          className={`w-auto h-auto object-contain group-hover:opacity-100 transition-all duration-300 brightness-0 ${
-           isComputeLabs || isYonaNetwork ? "max-w-[200px] max-h-[100px] scale-90" : "max-w-[320px] max-h-[160px] scale-125"
+           isComputeLabs || isYonaNetwork || isEigenLayer ? "max-w-[200px] max-h-[100px] scale-90" : "max-w-[320px] max-h-[160px] scale-125"
          }`}
          onError={(e) => {
            // Fallback if image fails
@@ -59,6 +60,7 @@ const projects = [
   {
     name: "EigenLayer",
     url: "https://www.eigenlayer.xyz/",
+    logo: "/eigen-layer-logo.webp",
     description: "Restaking protocol for shared security on Ethereum.",
   },
   {
