@@ -43,6 +43,7 @@ const projects = [
   {
     name: "Sunrise Layer",
     url: "https://sunriselayer.io/",
+    logo: "/sunrise-layer-logo.webp",
     description: "Specialized Data Availability Layer for Rollups.",
   },
   {
