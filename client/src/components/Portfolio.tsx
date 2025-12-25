@@ -110,7 +110,7 @@ export default function Portfolio() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.05 }}
-              className="bg-gray-50 p-8 md:p-12 flex flex-col items-center text-center group hover:shadow-lg transition-shadow duration-300"
+              className="bg-white p-8 md:p-12 flex flex-col items-center text-center group hover:shadow-lg transition-shadow duration-300"
             >
               <div className="h-32 w-full flex items-center justify-center mb-6">
                 <ProjectLogo name={project.name} url={project.url} logo={project.logo} />
