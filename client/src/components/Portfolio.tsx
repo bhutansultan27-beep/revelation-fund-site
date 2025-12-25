@@ -14,8 +14,7 @@ const ProjectLogo = ({ name, url, logo }: { name: string, url: string, logo?: st
          src={logo || `https://logo.clearbit.com/${domain}`} 
          alt={`${name} logo`}
          className={`w-auto h-auto object-contain group-hover:opacity-100 transition-all duration-300 ${
-           isComputeLabs || isYonaNetwork ? "max-w-[200px] max-h-[100px] scale-90" : 
-           isEigenLayer ? "max-w-[480px] max-h-[240px] scale-[1.875]" :
+           isComputeLabs || isYonaNetwork || isEigenLayer ? "max-w-[200px] max-h-[100px] scale-90" : 
            "max-w-[320px] max-h-[160px] scale-125"
          }`}
          onError={(e) => {
