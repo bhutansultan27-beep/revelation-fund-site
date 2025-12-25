@@ -60,7 +60,7 @@ const projects = [
   {
     name: "EigenLayer",
     url: "https://www.eigenlayer.xyz/",
-    logo: "/eigen-layer-logo.webp",
+    logo: "/eigen-layer-logo-new.png",
     description: "Restaking protocol for shared security on Ethereum.",
   },
   {
