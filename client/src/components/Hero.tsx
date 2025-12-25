@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { FaMedium } from "react-icons/fa";
 import { SiX } from "react-icons/si"; 
-import logo from "@assets/d7875c16-a616-404e-a523-fbbd4ebe6785-removebg-preview_1765559681672.png";
+import logo from "@assets/ChatGPT_Image_Dec_25,_2025,_03_30_13_AM_1766662226396.png";
 import VantaGlobe from "./VantaGlobe";
 import { useState, useEffect } from "react";
 
@@ -48,7 +48,7 @@ export default function Hero() {
           >
             <img 
               src={logo} 
-              alt="Revelation Fund" 
+              alt="THORChain" 
               className="w-80 h-auto object-contain rounded-lg"
             />
           </motion.div>
