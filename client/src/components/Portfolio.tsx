@@ -21,6 +21,7 @@ const ProjectLogo = ({ name, url, logo }: { name: string, url: string, logo?: st
            isMantra || isThorChain ? "max-w-[320px] max-h-[160px] scale-125" :
            "max-w-[320px] max-h-[160px] scale-125"
          }`}
+         style={{ background: 'transparent' }}
          onError={(e) => {
            // Fallback if image fails
            e.currentTarget.style.display = 'none';
