@@ -2,15 +2,15 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 // Logo Placeholder using Clearbit or fallback to letter
-const ProjectLogo = ({ name, url }: { name: string, url: string }) => {
+const ProjectLogo = ({ name, url, logo }: { name: string, url: string, logo?: string }) => {
   const domain = new URL(url).hostname;
   
   return (
     <div className="w-full flex items-center justify-center h-20 mb-6">
        <img 
-         src={`https://logo.clearbit.com/${domain}`} 
+         src={logo || `https://logo.clearbit.com/${domain}`} 
          alt={`${name} logo`}
-         className="max-w-[160px] max-h-[80px] object-contain grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+         className="max-w-[160px] max-h-[80px] object-contain group-hover:opacity-100 transition-all duration-300"
          onError={(e) => {
            // Fallback if image fails
            e.currentTarget.style.display = 'none';
@@ -31,6 +31,7 @@ const projects = [
   {
     name: "Compute Labs",
     url: "https://computelabs.ai/",
+    logo: "/logo-colored.svg",
     description: "Decentralized compute infrastructure for AI training.",
   },
   {
@@ -115,7 +116,7 @@ export default function Portfolio() {
               className="bg-gray-50 p-8 md:p-12 flex flex-col items-center text-center group hover:shadow-lg transition-shadow duration-300"
             >
               <div className="h-32 w-full flex items-center justify-center mb-6">
-                <ProjectLogo name={project.name} url={project.url} />
+                <ProjectLogo name={project.name} url={project.url} logo={project.logo} />
               </div>
               
               <p className="font-mono text-xs text-gray-500 leading-relaxed mb-12 flex-grow max-w-xs mx-auto">
