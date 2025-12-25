@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 const ProjectLogo = ({ name, url, logo }: { name: string, url: string, logo?: string }) => {
   const domain = new URL(url).hostname;
   const isComputeLabs = name === "Compute Labs";
+  const isYonaNetwork = name === "Yona Network";
   
   return (
     <div className="w-full flex items-center justify-center h-48 mb-6">
@@ -12,7 +13,7 @@ const ProjectLogo = ({ name, url, logo }: { name: string, url: string, logo?: st
          src={logo || `https://logo.clearbit.com/${domain}`} 
          alt={`${name} logo`}
          className={`w-auto h-auto object-contain group-hover:opacity-100 transition-all duration-300 brightness-0 ${
-           isComputeLabs ? "max-w-[240px] max-h-[120px] scale-100" : "max-w-[320px] max-h-[160px] scale-125"
+           isComputeLabs || isYonaNetwork ? "max-w-[240px] max-h-[120px] scale-100" : "max-w-[320px] max-h-[160px] scale-125"
          }`}
          onError={(e) => {
            // Fallback if image fails
