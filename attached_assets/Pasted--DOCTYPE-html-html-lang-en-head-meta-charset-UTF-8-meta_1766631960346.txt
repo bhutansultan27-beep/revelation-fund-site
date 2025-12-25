@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Friendly Husky Dog</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background: #f8f4f0;
+      overflow: hidden;
+    }
+    .dog-container {
+      width: 300px;
+      height: 300px;
+    }
+    /* Group styling for easy targeting */
+    .dog-part {
+      transition: transform 0.2s;
+    }
+    .eye {
+      fill: #333;
+    }
+    .nose {
+      fill: #222;
+    }
+    .tongue {
+      fill: #ff9999;
+    }
+  </style>
+</head>
+<body>
+  <div class="dog-container">
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <!-- Body -->
+      <ellipse class="dog-part body" cx="100" cy="120" rx="60" ry="40" fill="#e0e0e0" />
+
+      <!-- Head -->
+      <circle class="dog-part head" id="head" cx="100" cy="70" r="35" fill="#d0d0d0" />
+
+      <!-- Ears -->
+      <path class="dog-part ear" d="M80,45 L70,20 L90,35 Z" fill="#b0b0b0" />
+      <path class="dog-part ear" d="M120,45 L130,20 L110,35 Z" fill="#b0b0b0" />
+
+      <!-- Eyes -->
+      <circle class="dog-part eye" id="left-eye" cx="88" cy="65" r="4" />
+      <circle class="dog-part eye" id="right-eye" cx="112" cy="65" r="4" />
+
+      <!-- Nose -->
+      <ellipse class="dog-part nose" cx="100" cy="78" rx="6" ry="4" />
+
+      <!-- Mouth / Tongue -->
+      <path class="dog-part mouth" d="M92,85 Q100,90 108,85" stroke="#555" stroke-width="2" fill="none" />
+      <ellipse class="dog-part tongue" cx="100" cy="92" rx="8" ry="4" />
+
+      <!-- Tail -->
+      <path class="dog-part tail" id="tail" 
+            d="M160,120 
+               C170,110 185,115 190,105 
+               C195,95 190,85 185,80" 
+            fill="none" stroke="#b0b0b0" stroke-width="8" stroke-linecap="round" />
+
+      <!-- Legs -->
+      <rect class="dog-part leg" x="65" y="150" width="12" height="30" rx="6" fill="#c0c0c0" />
+      <rect class="dog-part leg" x="123" y="150" width="12" height="30" rx="6" fill="#c0c0c0" />
+    </svg>
+  </div>
+
+  <script>
+    // Wait for DOM & GSAP to load
+    window.addEventListener('DOMContentLoaded', () => {
+      gsap.registerPlugin();
+
+      // 🐶 Friendly Husky Animation Timeline
+      const tl = gsap.timeline({ repeat: -1, yoyo: true, repeatDelay: 0.5 });
+
+      // 1. Tail wag: gentle side-to-side swing
+      tl.to("#tail", {
+        attr: { d: "M160,120 C170,120 185,125 190,115 C195,105 190,95 185,90" },
+        duration: 0.4,
+        ease: "power1.inOut"
+      }, 0);
+
+      // 2. Head bop: subtle up-down
+      tl.to("#head", {
+        y: -5,
+        duration: 0.6,
+        ease: "sine.inOut"
+      }, 0);
+
+      // 3. Eyes follow head motion (slight vertical shift)
+      tl.to(".eye", {
+        attr: { cy: "+=2" },
+        duration: 0.6,
+        ease: "sine.inOut"
+      }, 0);
+
+      // Optional: Add a little "happy bounce" at peak
+      tl.to("#head", { y: -7, duration: 0.1 }, 0.3);
+      tl.to(".eye", { attr: { cy: "+=1" }, duration: 0.1 }, 0.3);
+    });
+  </script>
+</body>
+</html>
