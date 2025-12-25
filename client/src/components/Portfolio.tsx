@@ -68,19 +68,9 @@ const projects = [
     description: "Restaking protocol for shared security on Ethereum.",
   },
   {
-    name: "Mystiko Network",
-    url: "https://mystiko.network/",
-    description: "Base layer of web3 privacy and scalability.",
-  },
-  {
-    name: "Mantra Chain",
-    url: "https://www.mantrachain.io/",
-    logo: "/mantra-logo.png",
-    description: "Security-first RWA Layer 1 Blockchain.",
-  },
-  {
     name: "Binance",
     url: "https://binance.com",
+    logo: "/binance-logo.png",
     description: "The world's leading cryptocurrency exchange.",
   },
   {
@@ -92,11 +82,6 @@ const projects = [
     name: "Tellor",
     url: "https://tellor.io/",
     description: "Decentralized oracle protocol for blockchain data.",
-  },
-  {
-    name: "Ferrum Network",
-    url: "https://ferrum.network/",
-    description: "Interoperability network connecting blockchains.",
   },
   {
     name: "THORChain",
