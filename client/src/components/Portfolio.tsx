@@ -35,11 +35,6 @@ const projects = [
     description: "Decentralized compute infrastructure for AI training.",
   },
   {
-    name: "Form AI",
-    url: "https://www.formai.us/",
-    description: "Next-generation artificial intelligence framework.",
-  },
-  {
     name: "Public AI",
     url: "https://publicai.io/",
     description: "Democratizing access to AI technologies globally.",
