@@ -31,7 +31,7 @@ const projects = [
   {
     name: "Compute Labs",
     url: "https://computelabs.ai/",
-    logo: "/logo-colored.svg",
+    logo: "/compute-labs-logo.svg",
     description: "Decentralized compute infrastructure for AI training.",
   },
   {
