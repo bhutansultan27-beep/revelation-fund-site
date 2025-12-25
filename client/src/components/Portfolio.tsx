@@ -37,6 +37,7 @@ const projects = [
   {
     name: "Public AI",
     url: "https://publicai.io/",
+    logo: "/public-ai-logo.svg",
     description: "Democratizing access to AI technologies globally.",
   },
   {
