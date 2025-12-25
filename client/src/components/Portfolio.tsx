@@ -8,6 +8,7 @@ const ProjectLogo = ({ name, url, logo }: { name: string, url: string, logo?: st
   const isYonaNetwork = name === "Yona Network";
   const isEigenLayer = name === "EigenLayer";
   const isMantra = name === "Mantra Chain";
+  const isThorChain = name === "THORChain";
   
   return (
     <div className="w-full flex items-center justify-center h-48 mb-6">
@@ -17,7 +18,7 @@ const ProjectLogo = ({ name, url, logo }: { name: string, url: string, logo?: st
          className={`w-auto h-auto object-contain group-hover:opacity-100 transition-all duration-300 ${
            isComputeLabs || isYonaNetwork ? "max-w-[200px] max-h-[100px] scale-90" : 
            isEigenLayer ? "max-w-[260px] max-h-[130px] scale-110" :
-           isMantra ? "max-w-[320px] max-h-[160px] scale-125" :
+           isMantra || isThorChain ? "max-w-[320px] max-h-[160px] scale-125" :
            "max-w-[320px] max-h-[160px] scale-125"
          }`}
          onError={(e) => {
@@ -86,6 +87,7 @@ const projects = [
   {
     name: "THORChain",
     url: "https://thorchain.org/",
+    logo: "/thorchain-logo.png",
     description: "Decentralized cross-chain liquidity protocol.",
   },
   {
