@@ -83,6 +83,7 @@ const projects = [
   {
     name: "Tellor",
     url: "https://tellor.io/",
+    logo: "/tellor-logo.png",
     description: "Decentralized oracle protocol for blockchain data.",
   },
   {
@@ -94,6 +95,7 @@ const projects = [
   {
     name: "DAO Maker",
     url: "https://app.daomaker.com/",
+    logo: "/dao-maker-logo.png",
     description: "Leading crypto launchpad and incubator.",
   },
 ];
