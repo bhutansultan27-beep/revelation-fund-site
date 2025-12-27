@@ -78,6 +78,7 @@ const projects = [
   {
     name: "Crush",
     url: "https://www.crush.xyz/",
+    logo: "/crush-logo.png",
     description: "Innovative DeFi protocol for optimized yields.",
   },
   {
