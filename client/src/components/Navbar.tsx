@@ -4,6 +4,7 @@ export default function Navbar() {
   const [location] = useLocation();
 
   const navLinks = [
+    { name: "home", href: "/" },
     { name: "about", href: "/about" },
     { name: "portfolio", href: "/portfolio" },
   ];
